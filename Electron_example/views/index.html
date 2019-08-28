@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>OpenBCI UI</h1>
+    We are using node <script>document.write(process.versions.node)</script>,
+    Chrome <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+    <!--Input con id para referenciarlo-->
+    <br/>
+    <input class="form-control" id="Te_Amo_Brenda_mucho" type="text"/>
+    <br/>
+    <input class="form-control" id="De_verdad" type="text"/>
+
+    <!--Importamos el script-->
+    <script src="./index.js"></script>
+    <script type="text/javascript">
+      var $ = require('jquery');
+      window.$ = $;
+      require('bootstrap');
+    </script>
+  </body>
+</html>
