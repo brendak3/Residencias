@@ -3,24 +3,32 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
   </head>
   <body>
-    <h1>OpenBCI UI</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-    <!--Input con id para referenciarlo-->
-    <br/>
-    <input class="form-control" id="Te_Amo_Brenda_mucho" type="text"/>
-    <br/>
-    <input class="form-control" id="De_verdad" type="text"/>
+    <div class="container">
+      <div class="row">
+        <h1>OpenBCI UI</h1>
+      </div>
+      <div class="row">
+        We are using node <script>document.write(process.versions.node)</script>,
+        Chrome <script>document.write(process.versions.chrome)</script>,
+        and Electron <script>document.write(process.versions.electron)</script>.
+      </div>
+      <div class="row">
+        <label for="email">Email</label>
+        <input id="email" class="form-control" type="text"/>
+      </div>
+      <div class="row">
+        <label for="password">Password</label>
+        <input id="password" class="form-control" type="text"/>
+      </div>
+    </div>
+
 
     <!--Importamos el script-->
-    <script src="./index.js"></script>
-    <script type="text/javascript">
-      var $ = require('jquery');
-      window.$ = $;
-      require('bootstrap');
-    </script>
+    <script src="../scripts/master.js"></script>
+
   </body>
 </html>
