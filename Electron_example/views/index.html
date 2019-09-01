@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <div class="row">
-        <h1>OpenBCI UI</h1>
+       <p class="text-center">  <h1>OpenBCI UI - ITT</h1> </p>
       </div>
       <div class="row">
         We are using node <script>document.write(process.versions.node)</script>,
@@ -22,13 +22,21 @@
       </div>
       <div class="row">
         <label for="password">Password</label>
-        <input id="password" class="form-control" type="text"/>
+        <input id="password" class="form-control" type="password"/>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-sm-12">
+          <p class="text-center">
+            <button id="login" type="button" class="btn btn-primary">Login</button>
+          </p>
+        </div>
       </div>
     </div>
 
 
     <!--Importamos el script-->
-    <script src="../scripts/master.js"></script>
-
+    <script type="text/javascript" src="../scripts/master.js"></script>
+    <script type="text/javascript" src="../scripts/index.js"></script>
   </body>
 </html>
