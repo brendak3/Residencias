@@ -5,7 +5,7 @@ $(document).ready(function(){
   });
 });
 
-<<<<<<< HEAD
+
 function Login(){
   if ($('#email').val()=='abi_645@hotmail.com' || $('#email').val()=='barbozabrenda3@gmail.com') {
     console.log($('#email').val());
@@ -23,7 +23,6 @@ function Login(){
     "</div>";
     document.getElementById('cuerpo').innerHTML=innerhtml;
   }
-=======
 /*Variables, Importacion de Modulus, etc*/
 const mariadb = require('mariadb');
 var x;
@@ -54,5 +53,4 @@ function Login(email, password){
       })
 
   console.log(x);
->>>>>>> fd55545c6fbb0a74a92cfd54bad686ceba8f4514
 }
