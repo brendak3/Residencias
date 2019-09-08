@@ -70,6 +70,13 @@ const templateMenu = [
         }
       },
       {
+        label:'Alta Window',
+        accelerator: process.platform === 'darwin' ? 'Command+A' : 'Ctrl+A',
+        click: () =>{
+          AltaWindow();
+        }
+      },
+      {
         label: 'Exit',
         accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q',
         click: () => {
@@ -134,5 +141,28 @@ function createNewWindow(){
   /*Para solo cerrar la ventana emergente. Se limpia la ventana creada*/
   newWindow.on('close', () => {
     newWindow = null;
+  });
+}
+
+let altaWindow
+/*Para crear una nueva ventana*/
+function AltaWindow(){
+  /*Crea una nueva ventana*/
+  altaWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    title: 'Alta Usuario'
+  });
+  /*Quitar el menu*/
+  altaWindow.setMenu(null);
+  /*Carga la nueva vista*/
+  altaWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'views/altausuario.html'),
+    protocol: 'file',
+    slashes: true
+  }));
+  /*Para solo cerrar la ventana emergente. Se limpia la ventana creada*/
+  altaWindow.on('close', () => {
+    altaWindow = null;
   });
 }
