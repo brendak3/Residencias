@@ -5,24 +5,6 @@ $(document).ready(function(){
   });
 });
 
-
-function Login(){
-  if ($('#email').val()=='abi_645@hotmail.com' || $('#email').val()=='barbozabrenda3@gmail.com') {
-    console.log($('#email').val());
-    document.getElementById('cuerpo').innerHTML='';
-    var innerhtml='';
-    innerhtml+="<div class=\"row\">"+
-    "<table class=\"table\">"+
-    "<thead>"+
-    "<tr>"+
-    "<th scope=\"col\">id</th>"+
-    "<th scope=\"col\">nombre</th>"+
-    "</tr>"+
-    "</thead>"+
-    "</table>"+
-    "</div>";
-    document.getElementById('cuerpo').innerHTML=innerhtml;
-  }
 /*Variables, Importacion de Modulus, etc*/
 const mariadb = require('mariadb');
 var x;
@@ -53,4 +35,23 @@ function Login(email, password){
       })
 
   console.log(x);
+}
+
+function Login2(){
+  if ($('#email').val()=='abi_645@hotmail.com' || $('#email').val()=='barbozabrenda3@gmail.com') {
+    console.log($('#email').val());
+    document.getElementById('cuerpo').innerHTML='';
+    var innerhtml='';
+    innerhtml+="<div class=\"row\">"+
+    "<table class=\"table\">"+
+    "<thead>"+
+    "<tr>"+
+    "<th scope=\"col\">id</th>"+
+    "<th scope=\"col\">nombre</th>"+
+    "</tr>"+
+    "</thead>"+
+    "</table>"+
+    "</div>";
+    document.getElementById('cuerpo').innerHTML=innerhtml;
+  }
 }
