@@ -14,6 +14,7 @@ function createWindow () {
   win = new BrowserWindow({
     width: 800,
     height: 600,
+    title: 'E.E.G. DataSet ITT',
     webPreferences: {
       nodeIntegration: true
     }
@@ -62,7 +63,7 @@ const templateMenu = [
     label: 'File',
     submenu: [
       {
-        label: 'New Window',
+        label: 'Test Window',
         accelerator: process.platform === 'darwin' ? 'Command+N' : 'Ctrl+N',
         click: () =>{
           createNewWindow();
@@ -126,15 +127,21 @@ let newWindow
 function createNewWindow(){
   /*Crea una nueva ventana*/
   newWindow = new BrowserWindow({
-    width: 400,
-    height: 330,
-    title: 'New Window'
+    width: 1000,
+    height: 800,
+    title: 'New Window',
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
+
+  newWindow.webContents.openDevTools()
+
   /*Quitar el menu*/
   newWindow.setMenu(null);
   /*Carga la nueva vista*/
   newWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'views/info.html'),
+    pathname: path.join(__dirname, 'views/test.html'),
     protocol: 'file',
     slashes: true
   }));

@@ -7,7 +7,8 @@ $(document).ready(function(){
 
 /*Variables, Importacion de Modulus, etc*/
 const mariadb = require('mariadb');
-var x;
+var x = [];
+var innerhtml = "";
 
 //Conexion
 const pool = mariadb.createPool({
@@ -35,6 +36,20 @@ function Login(email, password){
       })
 
   console.log(x);
+
+  if (x.length > 0) {
+    document.getElementById('body').innerHTML = "";
+    innerhtml = "<div class=\"container\">" +
+                  "<div class=\"row\">" +
+                    "<>"
+                  "</div>" +
+                "</div>";
+
+    document.getElementById('body').innerHTML = innerhtml;
+  }
+  else{
+    alert("Wrong email or password");
+  }
 }
 
 function Login2(){
