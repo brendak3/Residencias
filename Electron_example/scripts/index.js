@@ -23,10 +23,30 @@ const pool = mariadb.createPool({
 function Login(email, password){
   pool.getConnection()
     .then(conn =>
-      conn.query("SELECT COUNT(*) FROM RS_USER WHERE RS_EMAIL = '" + email + "' AND RS_PASSWORD = '" + password + "'")
+      conn.query("SELECT COUNT(*) AS EXIST FROM RS_USER WHERE RS_EMAIL = '" + email + "' AND RS_PASSWORD = '" + password + "'")
         .then((rows) => {
           conn.end();
-          x = rows;
+          x = rows[0];
+          console.log(rows[0]);
+
+          console.log(x);
+
+          //Si es mayor a 0 entonces hubo un match
+          if (x['EXIST'] > 0) {
+            document.getElementById('body').innerHTML = "";
+            innerhtml = "<div class=\"container\">" +
+                          "<div class=\"row\">" +
+                            "Hola Mundo"
+                          "</div>" +
+                        "</div>";
+
+            document.getElementById('body').innerHTML = innerhtml;
+          }
+          //Si no alerta que no se encontró en la BD
+          else{
+            alert("Wrong email or password");
+          }
+
           return rows;
         }
       ))
@@ -34,22 +54,6 @@ function Login(email, password){
         console.log(err);
         conn.end();
       })
-
-  console.log(x);
-
-  if (x.length > 0) {
-    document.getElementById('body').innerHTML = "";
-    innerhtml = "<div class=\"container\">" +
-                  "<div class=\"row\">" +
-                    "<>"
-                  "</div>" +
-                "</div>";
-
-    document.getElementById('body').innerHTML = innerhtml;
-  }
-  else{
-    alert("Wrong email or password");
-  }
 }
 
 function Login2(){
