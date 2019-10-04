@@ -34,26 +34,88 @@ function Login(email, password){
           //Si es mayor a 0 entonces hubo un match
           if (x['EXIST'] > 0) {
             document.getElementById('body').innerHTML = "";
-            innerhtml = "<div class=\"container\">" +
-                          "<nav>" +
-                              "<div class=\"nav nav-tabs\" id=\"nav-tab\" role=\"tablist\">" +
-                                "<a class=\"nav-item nav-link active\" id=\"nav-home-tab\" data-toggle=\"tab\" href=\"#nav-home\" role=\"tab\" aria-controls=\"nav-home\" aria-selected=\"true\">Home</a>" +
-                                "<a class=\"nav-item nav-link\" id=\"nav-profile-tab\" data-toggle=\"tab\" href=\"#nav-profile\" role=\"tab\" aria-controls=\"nav-profile\" aria-selected=\"false\">Profile</a>"+
-                                "<a class=\"nav-item nav-link\" id=\"nav-contact-tab\" data-toggle=\"tab\" href=\"#nav-contact\" role=\"tab\" aria-controls=\"nav-contact\" aria-selected=\"false\">Contact</a>" +
-                              "</div>" +
-                          "</nav>"+
-                          "<div class=\"tab-content\" id=\"nav-tabContent\">" +
-                            "<div class=\"tab-pane fade show active\" id=\"nav-home\" role=\"tabpanel\" aria-labelledby=\"nav-home-tab\">" +
-                                "<table class=\"table\"><thead><tr><th>Abiel</th></tr></thead><tbody><tr><th>23</th></tr></tbody></table>"
-                            "</div>" +
-                            "<div class=\"tab-pane fade\" id=\"nav-profile\" role=\"tabpanel\" aria-labelledby=\"nav-profile-tab\">" +
-                              "<table class=\"table\"><thead><tr><th>Abiel</th></tr></thead><tbody><tr><th>23</th></tr></tbody></table>" +
-                            "</div>" +
-                            "<div class=\"tab-pane fade\" id=\"nav-contact\" role=\"tabpanel\" aria-labelledby=\"nav-contact-tab\">...</div>" +
-                          "</div>" +
-                        "</div>";
+            innerhtml =  "<ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">" +
+              "<li class=\"nav-item\">" +
+                "<a class=\"nav-link active\" id=\"home-tab\" data-toggle=\"tab\" href=\"#home\" role=\"tab\" aria-controls=\"home\" aria-selected=\"true\">Ultimas Pruebas </a>"+
+              "</li>" +
+              "<li class=\"nav-item\">" +
+                "<a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">Registrados</a>"+
+              "</li>" +
+              "<li class=\"nav-item\">"+
+                "<a class=\"nav-link\" id=\"contact-tab\" data-toggle=\"tab\" href=\"#contact\" role=\"tab\" aria-controls=\"contact\" aria-selected=\"false\">Etc.</a>" +
+              "</li>" +
+            "</ul>"+
+            "<div class=\"tab-content\" id=\"myTabContent\">" +
+              "<div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\"><p id=\"inner1\">Bunas</p></div>" +
+              "<div class=\"tab-pane fade\" id=\"profile\" role=\"tabpanel\" aria-labelledby=\"profile-tab\"><p id=\"inner2\"></p></div>" +
+              "<div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">Dias</div>" +
+            "</div>";
 
             document.getElementById('body').innerHTML = innerhtml;
+
+            //Solo por ejemplo
+            $('#inner1').html("<table class=\"table\">" +
+              "<thead>" +
+                "<tr>" +
+                  "<th scope=\"col\">#</th>" +
+                  "<th scope=\"col\">First</th>" +
+                  "<th scope=\"col\">Last</th>" +
+                  "<th scope=\"col\">Handle</th>" +
+                "</tr>" +
+              "</thead>" +
+              "<tbody>" +
+                "<tr>" +
+                  "<th scope=\"row\">1</th>" +
+                  "<td>Mark</td>" +
+                  "<td>Otto</td>" +
+                  "<td>@mdo</td>" +
+                "</tr>" +
+                "<tr>" +
+                  "<th scope=\"row\">2</th>" +
+                  "<td>Jacob</td>" +
+                  "<td>Thornton</td>" +
+                  "<td>@fat</td>" +
+                "</tr>" +
+                "<tr>" +
+                  "<th scope=\"row\">3</th>" +
+                  "<td>Larry</td>" +
+                  "<td>the Bird</td>" +
+                  "<td>@twitter</td>" +
+                "</tr>" +
+              "</tbody>" +
+            "</table>");
+
+            //Borrar Despues
+            $('#inner2').html("<table class=\"table\">" +
+              "<thead>" +
+                "<tr>" +
+                  "<th scope=\"col\">#</th>" +
+                  "<th scope=\"col\">First</th>" +
+                  "<th scope=\"col\">Last</th>" +
+                  "<th scope=\"col\">Handle</th>" +
+                "</tr>" +
+              "</thead>" +
+              "<tbody>" +
+                "<tr>" +
+                  "<th scope=\"row\">1</th>" +
+                  "<td>Mark</td>" +
+                  "<td>Otto</td>" +
+                  "<td>@mdo</td>" +
+                "</tr>" +
+                "<tr>" +
+                  "<th scope=\"row\">2</th>" +
+                  "<td>Jacob</td>" +
+                  "<td>Thornton</td>" +
+                  "<td>@fat</td>" +
+                "</tr>" +
+                "<tr>" +
+                  "<th scope=\"row\">3</th>" +
+                  "<td>Larry</td>" +
+                  "<td>the Bird</td>" +
+                  "<td>@twitter</td>" +
+                "</tr>" +
+              "</tbody>" +
+            "</table>");
           }
           //Si no alerta que no se encontró en la BD
           else{
