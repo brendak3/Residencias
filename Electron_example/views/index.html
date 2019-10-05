@@ -4,40 +4,126 @@
     <meta charset="UTF-8">
     <title>E.E.G. DataSet ITT</title>
     <!--Bootstrap-->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" /> -->
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../styles/gentellela/vendors/bootstrap/dist/css/bootstrap.min.css" />
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="../styles/gentellela/vendors/font-awesome/css/font-awesome.min.css" />
+    <!--NProgress-->
+    <link rel="stylesheet" href="../styles/gentellela/vendors/nprogress/nprogress.css"/>
+    <!--Animate.css-->
+    <link rel="stylesheet" href="../styles/gentellela/vendors/animate.css/animate.min.css" />
+    <!--Custom-->
+    <link rel="stylesheet" href="../styles/gentellela/build/css/custom.min.css" />
+
   </head>
-  <body>
-    <div id="body" class="container">
-      <div class="row">
-       <p class="text-center">  <h1>OpenBCI UI - ITT</h1> </p>
+  <body class="login" id="body">
+    <div>
+          <a class="hiddenanchor" id="signup"></a>
+          <a class="hiddenanchor" id="signin"></a>
+
+          <div class="login_wrapper">
+            <div class="animate form login_form">
+              <section class="login_content">
+                  <h1>Login Form</h1>
+                  <div>
+                    <input type="text" class="form-control" placeholder="Email" required="" id="email" />
+                  </div>
+                  <br />
+                  <div>
+                    <input type="password" class="form-control" placeholder="Password" required="" id="password"/>
+                  </div>
+                  <br/>
+                  <div>
+                    <button class="btn btn-default" id="login">Log in</button>
+                    <button class="btn btn-default" id="window">New Window</button>
+                    <a class="reset_pass" href="#">Lost your password?</a>
+                  </div>
+
+                  <div class="clearfix"></div>
+
+                  <div class="separator">
+                    <p class="change_link">New to site?
+                      <a href="#signup" class="to_register"> Create Account </a>
+                    </p>
+                    <div class="clearfix"></div>
+                    <br />
+
+                    <div>
+                      <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                      <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                    </div>
+                  </div>
+              </section>
+            </div>
+
+          <div id="register" class="animate form registration_form">
+          <section class="login_content">
+              <h1>Create Account</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" required="" />
+              </div>
+              <br/>
+              <div>
+                <input type="email" class="form-control" placeholder="Email" required="" />
+              </div>
+              <br/>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <br/>
+              <div>
+                <a class="btn btn-default submit" href="index.html">Submit</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">Already a member ?
+                  <a href="#signin" class="to_register"> Log in </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                </div>
+              </div>
+          </section>
+        </div>
       </div>
-      <div id="cuerpo">
-        <div class="row">
-          <p class="text-center"> <h1>Login</h1> </p>
-        </div>
-        <div class="row">
-          <label for="email">Email</label>
-          <input id="email" class="form-control" type="text"/>
-        </div>
-        <div class="row">
-          <label for="password">Password</label>
-          <input id="password" class="form-control" type="password"/>
-        </div>
-        <br/>
-        <div class="row">
-          <div class="col-sm-12">
-            <p class="text-center">
-              <button id="login" type="button" class="btn btn-primary">Login</button>
-            </p>
-          </div>
-        </div>
-      </div>
-      <br/>
     </div>
 
     <!--Importamos el script-->
     <script type="text/javascript" src="../scripts/master.js"></script>
     <script type="text/javascript" src="../scripts/index.js"></script>
+    <script type="text/javascript">
+      const button = document.getElementById('window');
+      button.addEventListener('click', () => {
+      createBrowserWindow();
+      });
+
+      function createBrowserWindow() {
+        /*Como el del video*/
+        const url = require('url');
+        const path = require('path');
+        const remote = require('electron').remote;
+        const BrowserWindow = remote.BrowserWindow;
+        const win = new BrowserWindow({
+          height: 600,
+          width: 800
+        });
+
+        win.loadURL(url.format({
+          pathname: path.join(__dirname, '/info.html'),
+          protocol: 'file',
+          slashes: true
+        }));
+      }
+    </script>
     <!-- <script type="text/javascript" src="../scripts/openbci.js"></script> -->
     <!-- <script type="text/javascript" src="../scripts/webcapa.js"></script> -->
     <!-- <script type="text/javascript" src="../scripts/serialport.js"></script> -->
