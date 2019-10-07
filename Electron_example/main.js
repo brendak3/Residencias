@@ -8,20 +8,29 @@ const path = require('path');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+let child
 
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 800,
     title: 'E.E.G. DataSet ITT',
     webPreferences: {
       nodeIntegration: true
     }
   })
 
+  // child = new BrowserWindow({ parent: win, modal: true, show: false })
+
   // and load the index.html of the app.
   //win.loadFile('views/index.html')
+  // child.loadURL(url.format({
+  //   pathname: path.join(__dirname, 'views/index.html'),
+  //   protocol: 'file',
+  //   slashes: true
+  // }))
+  //Maximizar la pantalla
 
   /*Como dicta el del videl*/
   win.loadURL(url.format({
@@ -29,6 +38,10 @@ function createWindow () {
     protocol: 'file',
     slashes: true
   }))
+
+  // child.once('ready-to-show', () => {
+  //   child.show()
+  // })
 
   // Open the DevTools.
   win.webContents.openDevTools()
@@ -45,14 +58,24 @@ function createWindow () {
   // }
 
   // Emitted when the window is closed.
+  // child.on('closed', () => {
+  //   // Dereference the window object, usually you would store windows
+  //   // in an array if your app supports multi windows, this is the time
+  //   // when you should delete the corresponding element.
+  //   win = null
+  //
+  //   /*El del video*/
+  //   //app.quit();
+  // })
+
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    //win = null
+    win = null
 
     /*El del video*/
-    app.quit();
+    //app.quit();
   })
 }
 

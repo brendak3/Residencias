@@ -1,131 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <title>E.E.G. DataSet ITT</title>
-    <!--Bootstrap-->
-    <!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" /> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+    <title>E.E.G. </title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="../styles/gentellela/vendors/bootstrap/dist/css/bootstrap.min.css" />
-    <!--Font Awesome-->
-    <link rel="stylesheet" href="../styles/gentellela/vendors/font-awesome/css/font-awesome.min.css" />
-    <!--NProgress-->
-    <link rel="stylesheet" href="../styles/gentellela/vendors/nprogress/nprogress.css"/>
-    <!--Animate.css-->
-    <link rel="stylesheet" href="../styles/gentellela/vendors/animate.css/animate.min.css" />
-    <!--Custom-->
-    <link rel="stylesheet" href="../styles/gentellela/build/css/custom.min.css" />
+    <link href="../styles/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../styles/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../styles/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet">
 
+
+    <!-- Custom Theme Style -->
+    <link href="../styles/gentelella/build/css/custom.min.css" rel="stylesheet">
   </head>
-  <body class="login" id="body">
-    <div>
-          <a class="hiddenanchor" id="signup"></a>
-          <a class="hiddenanchor" id="signin"></a>
 
-          <div class="login_wrapper">
-            <div class="animate form login_form">
-              <section class="login_content">
-                  <h1>Login Form</h1>
-                  <div>
-                    <input type="text" class="form-control" placeholder="Email" required="" id="email" />
-                  </div>
-                  <br />
-                  <div>
-                    <input type="password" class="form-control" placeholder="Password" required="" id="password"/>
-                  </div>
-                  <br/>
-                  <div>
-                    <button class="btn btn-default" id="login">Log in</button>
-                    <button class="btn btn-default" id="window">New Window</button>
-                    <a class="reset_pass" href="#">Lost your password?</a>
-                  </div>
-
-                  <div class="clearfix"></div>
-
-                  <div class="separator">
-                    <p class="change_link">New to site?
-                      <a href="#signup" class="to_register"> Create Account </a>
-                    </p>
-                    <div class="clearfix"></div>
-                    <br />
-
-                    <div>
-                      <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                      <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                    </div>
-                  </div>
-              </section>
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-signal"></i> <span>E.E.G. Data Set</span></a>
             </div>
 
-          <div id="register" class="animate form registration_form">
-          <section class="login_content">
-              <h1>Create Account</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+
               </div>
-              <br/>
-              <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+              <div class="profile_info">
+                <span>Welcome!</span>
               </div>
-              <br/>
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <br/>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="">Option</a></li>
+                      <li><a href="">Option2</a></li>
+                      <li><a href="">Option3</a></li>
+                    </ul>
+                  </li>
+                </ul>
               </div>
 
-              <div class="clearfix"></div>
+            </div>
+            <!-- /sidebar menu -->
 
-              <div class="separator">
-                <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                </div>
-              </div>
-          </section>
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
         </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+          <br />
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Instituto Tecnologico de Tijuana - UI by <a href="https://colorlib.com">Brenda Barboza y Abiel Villegas</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
     </div>
+    <!-- Insert this line above script imports  -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <!-- jQuery -->
+    <script src="../styles/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../styles/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <!--Importamos el script-->
-    <script type="text/javascript" src="../scripts/master.js"></script>
+    <!-- NProgress -->
+    <script src="../styles/gentelella/vendors/nprogress/nprogress.js"></script>
+
+    <!-- DateJS -->
+    <script src="../styles/gentelella/vendors/DateJS/build/date.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../styles/gentelella/build/js/custom.min.js"></script>
+
+    <!--JS Propio-->
     <script type="text/javascript" src="../scripts/index.js"></script>
-    <script type="text/javascript">
-      const button = document.getElementById('window');
-      button.addEventListener('click', () => {
-      createBrowserWindow();
-      });
-
-      function createBrowserWindow() {
-        /*Como el del video*/
-        const url = require('url');
-        const path = require('path');
-        const remote = require('electron').remote;
-        const BrowserWindow = remote.BrowserWindow;
-        const win = new BrowserWindow({
-          height: 600,
-          width: 800
-        });
-
-        win.loadURL(url.format({
-          pathname: path.join(__dirname, '/info.html'),
-          protocol: 'file',
-          slashes: true
-        }));
-      }
-    </script>
-    <!-- <script type="text/javascript" src="../scripts/openbci.js"></script> -->
-    <!-- <script type="text/javascript" src="../scripts/webcapa.js"></script> -->
-    <!-- <script type="text/javascript" src="../scripts/serialport.js"></script> -->
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
   </body>
 </html>

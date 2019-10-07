@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>E.E.G. DataSet ITT</title>
+    <!--Bootstrap-->
+    <!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" /> -->
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../styles/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" />
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="../styles/gentelella/vendors/font-awesome/css/font-awesome.min.css" />
+    <!--NProgress-->
+    <link rel="stylesheet" href="../styles/gentelella/vendors/nprogress/nprogress.css"/>
+    <!--Animate.css-->
+    <link rel="stylesheet" href="../styles/gentelella/vendors/animate.css/animate.min.css" />
+    <!--Custom-->
+    <link rel="stylesheet" href="../styles/gentelella/build/css/custom.min.css" />
+
+  </head>
+  <body class="login" id="body">
+    <div>
+          <a class="hiddenanchor" id="signup"></a>
+          <a class="hiddenanchor" id="signin"></a>
+
+          <div class="login_wrapper">
+            <div class="animate form login_form">
+              <section class="login_content">
+                  <h1>Login</h1>
+                  <div>
+                    <input type="text" class="form-control" placeholder="Email" required="" id="email" />
+                  </div>
+                  <br />
+                  <div>
+                    <input type="password" class="form-control" placeholder="Password" required="" id="password"/>
+                  </div>
+                  <br/>
+                  <div>
+                    <button class="btn btn-default" id="login">Log in</button>
+                  </div>
+
+                  <div class="clearfix"></div>
+
+                  <div class="separator">
+                    <p class="change_link">New to site?
+                      <a href="#signup" class="to_register"> Create Account </a>
+                    </p>
+                    <div class="clearfix"></div>
+                    <br />
+
+                    <div>
+                      <h1><i class="fa fa-signal"></i> E.E.G. DataSet</h1>
+                      <p>©2019 Instituto Tecnologico de Tijiana - Brenda Barboza y Abiel Alejandro</p>
+                    </div>
+                  </div>
+              </section>
+            </div>
+
+          <div id="register" class="animate form registration_form">
+          <section class="login_content">
+              <h1>Create Account</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" required="" />
+              </div>
+              <br/>
+              <div>
+                <input type="email" class="form-control" placeholder="Email" required="" />
+              </div>
+              <br/>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <br/>
+              <div>
+                <a class="btn btn-default submit" href="index.html">Submit</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">Already a member ?
+                  <a href="#signin" class="to_register"> Log in </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-signal"></i> E.E.G. DataSet</h1>
+                  <p>©2019 Instituto Tecnologico de Tijiana - Brenda Barboza y Abiel Alejandro</p>
+                </div>
+              </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!--Importamos el script-->
+    <script type="text/javascript" src="../scripts/master.js"></script>
+    <script type="text/javascript" src="../scripts/index.js"></script>
+
+    <!--Experimiento de como se crearia una nueva ventana-->
+    <script type="text/javascript">
+      const button = document.getElementById('window');
+      button.addEventListener('click', () => {
+      createBrowserWindow();
+      });
+
+      function createBrowserWindow() {
+        /*Como el del video*/
+        const url = require('url');
+        const path = require('path');
+        const remote = require('electron').remote;
+        const BrowserWindow = remote.BrowserWindow;
+        const win = new BrowserWindow({
+          width: 565,
+          height: 532
+        });
+
+        win.maximize();
+
+        win.loadURL(url.format({
+          pathname: path.join(__dirname, '/info.html'),
+          protocol: 'file',
+          slashes: true
+        }));
+      }
+    </script>
+    <!-- <script type="text/javascript" src="../scripts/openbci.js"></script> -->
+    <!-- <script type="text/javascript" src="../scripts/webcapa.js"></script> -->
+    <!-- <script type="text/javascript" src="../scripts/serialport.js"></script> -->
+  </body>
+</html>

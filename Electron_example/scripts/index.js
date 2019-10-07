@@ -3,12 +3,49 @@ $(document).ready(function(){
   $('#login').click(function(){
     Login($('#email').val(), $('#password').val());
   });
+
+  //Abrir el modal
+  ModalLogin();
 });
 
 /*Variables, Importacion de Modulus, etc*/
 const mariadb = require('mariadb');
 var x = [];
 var innerhtml = "";
+
+/*Constantes para creacion de ventanas en electron*/
+const url = require('url');
+const path = require('path');
+const remote = require('electron').remote;
+const BrowserWindow = remote.BrowserWindow;
+
+//Abrir uina ventana como modal
+function ModalLogin(){
+  //Guardo la ventana en una variable
+  var window = remote.getCurrentWindow();
+  //Creo la ventana Child de Login
+  let child = new BrowserWindow({ parent: window, modal: true})
+  child.loadURL(url.format({
+    pathname: path.join(__dirname, '/loginmodal.html'),
+    protocol: 'file',
+    slashes: true
+  }))
+
+  child.once('ready-to-show', () => {
+    child.show()
+  })
+
+  child.on('closed', () => {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    win = null
+
+    /*El del video*/
+    //app.quit();
+  })
+}
+
 
 //Conexion
 const pool = mariadb.createPool({
@@ -129,23 +166,4 @@ function Login(email, password){
         console.log(err);
         conn.end();
       })
-}
-
-function Login2(){
-  if ($('#email').val()=='abi_645@hotmail.com' || $('#email').val()=='barbozabrenda3@gmail.com') {
-    console.log($('#email').val());
-    document.getElementById('cuerpo').innerHTML='';
-    var innerhtml='';
-    innerhtml+="<div class=\"row\">"+
-    "<table class=\"table\">"+
-    "<thead>"+
-    "<tr>"+
-    "<th scope=\"col\">id</th>"+
-    "<th scope=\"col\">nombre</th>"+
-    "</tr>"+
-    "</thead>"+
-    "</table>"+
-    "</div>";
-    document.getElementById('cuerpo').innerHTML=innerhtml;
-  }
 }
