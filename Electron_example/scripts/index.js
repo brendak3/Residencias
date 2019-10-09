@@ -6,6 +6,7 @@ $(document).ready(function(){
 
   //Abrir el modal
   ModalLogin();
+  $('#page').attr('src', '../views/info.html');
 });
 
 /*Variables, Importacion de Modulus, etc*/
