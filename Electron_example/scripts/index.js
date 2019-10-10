@@ -6,7 +6,20 @@ $(document).ready(function(){
 
   //Abrir el modal
   ModalLogin();
-  $('#page').attr('src', '../views/info.html');
+
+  $('#altausuario').click(function(){
+    $('#page').attr('src', '../views/altausuario.html');
+  });
+
+  /*Tabla de usuarios*/
+  $('#tablapruebas').click(function(){
+    $('#page').attr('src', '../views/tablapruebas.html');
+  });
+
+  /*Tabla de datos*/
+  $('#grafica').click(function(){
+    $('#page').attr('src', '../views/test.html');
+  });
 });
 
 /*Variables, Importacion de Modulus, etc*/
