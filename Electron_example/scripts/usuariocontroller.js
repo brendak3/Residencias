@@ -1,9 +1,3 @@
-$(document).ready({
-  $('#submit').click(function(){
-    SaveUser();
-  });
-});
-
 //Conexion
 const pool = mariadb.createPool({
      database: 'residencia',
@@ -13,11 +7,11 @@ const pool = mariadb.createPool({
      connectionLimit: 5
 });
 
-function SaveUser(){
+function guardarDatos(){
   pool.getConnection()
     .then(conn =>
       conn.query("INSERT INTO RS_DATOSPERSONA (RSD_NAME, RSD_LASTNAME, RSD_EMAIL, RSD_GENDER) " +
-      "VALUES(" + $('#name').val() + ", " + $('#lastname').val() + ", " + $('#email').val() + ", " + $('#name').val() + ")")
+      "VALUES(" + + ", " + + ", " +  + ", " +  + ")")
         .then((rows) => {
           conn.end();
           return rows;
