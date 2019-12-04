@@ -95,39 +95,47 @@
       </div>
     </div>
 
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <!--Importamos el script-->
-    <script type="text/javascript" src="../scripts/master.js"></script>
+    <script src="../styles/gentelella/vendors/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/index.js"></script>
+
+
+
 
     <!--Experimiento de como se crearia una nueva ventana-->
     <script type="text/javascript">
-      const button = document.getElementById('window');
-      button.addEventListener('click', () => {
-      createBrowserWindow();
-      });
-
-      function createBrowserWindow() {
-        /*Como el del video*/
-        const url = require('url');
-        const path = require('path');
-        const remote = require('electron').remote;
-        const BrowserWindow = remote.BrowserWindow;
-        const win = new BrowserWindow({
-          width: 565,
-          height: 532
-        });
-
-        win.maximize();
-
-        win.loadURL(url.format({
-          pathname: path.join(__dirname, '/info.html'),
-          protocol: 'file',
-          slashes: true
-        }));
-      }
+      // const button = document.getElementById('window');
+      // button.addEventListener('click', () => {
+      // createBrowserWindow();
+      // });
+      //
+      // function createBrowserWindow() {
+      //   /*Como el del video*/
+      //   const url = require('url');
+      //   const path = require('path');
+      //   const remote = require('electron').remote;
+      //   const BrowserWindow = remote.BrowserWindow;
+      //   const win = new BrowserWindow({
+      //     width: 565,
+      //     height: 532,
+      //     webPreferences:{
+      //       nodeIntegration: true
+      //     }
+      //   });
+      //
+      //   win.maximize();
+      //
+      //   win.loadURL(url.format({
+      //     pathname: path.join(__dirname, '/info.html'),
+      //     protocol: 'file',
+      //     slashes: true
+      //   }));
+      // }
     </script>
     <!-- <script type="text/javascript" src="../scripts/openbci.js"></script> -->
     <!-- <script type="text/javascript" src="../scripts/webcapa.js"></script> -->
     <!-- <script type="text/javascript" src="../scripts/serialport.js"></script> -->
+    <script>if (window.module) module = window.module;</script>
   </body>
 </html>

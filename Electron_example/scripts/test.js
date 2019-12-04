@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  HighChartExample();
+  // HighChartExample();
   //Metodo para dibujar las graficas
   var ctx = document.getElementById('myChart').getContext('2d');
   myChart = new Chart(ctx, {

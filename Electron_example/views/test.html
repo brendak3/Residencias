@@ -77,15 +77,16 @@
     </div>
 
     <!--Importamos el script-->
-    <script type="text/javascript" src="../scripts/master.js"></script>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <!-- <script
 			  src="https://code.jquery.com/jquery-3.4.1.min.js"
 			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			  crossorigin="anonymous"></script> -->
-
+    <script src="../styles/gentelella/vendors/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/test.js"></script>
     <script type="text/javascript" src="../scripts/openbci.js"></script>
     <!-- <script type="text/javascript" src="../scripts/webcapa.js"></script> -->
     <!-- <script type="text/javascript" src="../scripts/serialport.js"></script> -->
+    <script>if (window.module) module = window.module;</script>
   </body>
 </html>

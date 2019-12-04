@@ -15,7 +15,7 @@ function createWindow () {
   win = new BrowserWindow({
     width: 1000,
     height: 800,
-    title: 'E.E.G. DataSet ITT',
+    title: 'E.E.G. DataSet ITT Index',
     webPreferences: {
       nodeIntegration: true
     }
@@ -181,7 +181,10 @@ function AltaWindow(){
   altaWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    title: 'Alta Usuario'
+    title: 'Alta Usuario',
+    webPreferences: {
+      nodeIntegration: false
+    }
   });
   /*Quitar el menu*/
   altaWindow.setMenu(null);
