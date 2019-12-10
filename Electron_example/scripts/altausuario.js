@@ -1,9 +1,13 @@
-$(document).ready({
+$(document).ready(function(){
+  document.getElementById('page').onload = function () {
+     const iframeWin = document.getElementById('page').contentWindow
+     iframeWin.require = window.require
+  }
   $('#submit').click(function(){
     SaveUser();
   });
 });
-
+//const mariadb = require('mariadb');
 //Conexion
 const pool = mariadb.createPool({
      database: 'residencia',

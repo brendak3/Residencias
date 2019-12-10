@@ -48,10 +48,21 @@
           </div>
         </div>
         <button id="submit" onclick="guardarDatos()" class="btn btn-primary">Registrar</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
     </div>
-
+    <!--Modal-->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          ...
+        </div>
+      </div>
+    </div>
     <!--Importamos el script-->
-    <script type="text/javascript" src="../scripts/master.js"></script>
+    <!-- <script type="text/javascript" src="../scripts/master.js"></script> -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="../scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="../scripts/altausuario.js"></script>
+    <script>if (window.module) module = window.module;</script>
   </body>
 </html>

@@ -6,10 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>E.E.G. </title>
-
+    <title>E.E.G.</title>
     <!-- Bootstrap -->
     <link href="../styles/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -33,23 +31,23 @@
 
             <div class="clearfix"></div>
 
+
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
 
               </div>
               <div class="profile_info">
-                <span>Welcomeeeeeee!</span>
+                <span>Welcome!</span>
               </div>
             </div>
             <!-- /menu profile quick info -->
 
             <br />
 
-            <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <h3>Site Map</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -63,6 +61,7 @@
 
             </div>
             <!-- /sidebar menu -->
+
           </div>
         </div>
 
@@ -84,15 +83,16 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
+            <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Tabla de Pruebas<small></small></h2>
+                    <h2 id="title">Lates Test <small>List of the lates patient tests.</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      <li class="dropdown">
+                      <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
                           <li><a href="#">Settings 1</a>
@@ -100,23 +100,55 @@
                           <li><a href="#">Settings 2</a>
                           </li>
                         </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
+                      </li> -->
+                      <!-- <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li> -->
                     </ul>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
-                    <div class="embed-responsive embed-responsive-16by9">
-                      <iframe id="page" class="embed-responsive-item" src="../views/tablapruebas.html" allowfullscreen></iframe>
+                    <div id="html_container">
+                      <button id="alta_usuario" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add <i class="fa fa-plus"></i></button>
+                      <br />
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr id="trows">
+                              <th scope="col">#</th>
+                              <th scope="col">First</th>
+                              <th scope="col">Last</th>
+                              <th scope="col">Handle</th>
+                            </tr>
+                          </thead>
+                          <tbody id="tbody">
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td>@mdo</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>Jacob</td>
+                              <td>Thornton</td>
+                              <td>@fat</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>Larry</td>
+                              <td>the Bird</td>
+                              <td>@twitter</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <br />
-
         </div>
         <!-- /page content -->
 
@@ -128,6 +160,69 @@
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
+
+        <!--Modal-->
+        <div id="alta_paciente" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Patient Registration</h4>
+              </div>
+              <div class="modal-body">
+                <input type="number" id="id_paciente" style="display:none;" />
+                <!--Formulario de Alta-->
+                <div class="row">
+                  <div class="col-md-6 col-xs-6">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" class="form-control"  placeholder="Name" />
+                  </div>
+                  <div class="col-md-6 col-xs-6">
+                    <label for="lastname">Last Name</label>
+                    <input id="lastname" type="text" class="form-control"  placeholder="Last Name" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 col-xs-4">
+                    <label for="occupation">Occupation</label>
+                    <input id="occupation" type="text" class="form-control"  placeholder="Email" />
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                    <label for="email">Email</label>
+                    <input id="email" type="text" class="form-control"  placeholder="Email" />
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                    <label for="age">Age</label>
+                    <input id="age" type="text" class="form-control" placeholder="Email" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-xs-6">
+                    <label for="inputBirthdate">Birthdate</label>
+                    <input id="inputBirthdate" type="date" class="form-control" />
+                  </div>
+                  <div class="col-md-6 col-xs-6">
+                    <label for="inputState">Gender</label>
+                    <select id="inputState" class="form-control">
+                      <option selected value="0">Female</option>
+                      <option value="1">Male</option>
+                    </select>
+                  </div>
+                </div>
+                <!--Formulario de Alta-->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="changes" type="button" class="btn btn-primary">Save changes</button>
+                <button id="save" type="button" class="btn btn-primary">Save</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!--Modal-->
       </div>
     </div>
     <!-- Insert this line above script imports  -->
@@ -151,5 +246,6 @@
     <script type="text/javascript" src="../scripts/index.js"></script>
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
+
   </body>
 </html>
