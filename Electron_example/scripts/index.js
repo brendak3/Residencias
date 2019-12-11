@@ -409,6 +409,7 @@ function UpdatePaciente(){
           //Table must have been created before
           // " CREATE TABLE myTable (id int, val varchar(255)) "
           //return conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
+          $("#alta_paciente").modal("toggle");
         })
         .then((res) => {
           console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
@@ -437,6 +438,66 @@ function InsertPaciente(){
           //Table must have been created before
           // " CREATE TABLE myTable (id int, val varchar(255)) "
           //return conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
+          //cerrar modal
+          $("#alta_paciente").modal("toggle");
+        })
+        .then((res) => {
+          console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
+          alert(res);
+          conn.end();
+        })
+        .catch(err => {
+          //handle error
+          console.log(err);
+          conn.end();
+        })
+
+    }).catch(err => {
+      //not connected
+    });
+}
+
+function Consultar_paciente(id){
+  pool.getConnection()
+    .then(conn => {
+
+      conn.query("SELECT * FROM RESIDENCIA.rs_datospersona WHERE RSD_ID= " + id)
+        .then((rows) => {
+          console.log(rows); //[ {val: 1}, meta: ... ]
+          //Table must have been created before
+          // " CREATE TABLE myTable (id int, val varchar(255)) "
+          //return conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
+          //cerrar modal
+          $("#alta_paciente").modal("toggle");
+        })
+        .then((res) => {
+          console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
+          alert(res);
+          conn.end();
+        })
+        .catch(err => {
+          //handle error
+          console.log(err);
+          conn.end();
+        })
+
+    }).catch(err => {
+      //not connected
+    });
+}
+
+function Eliminar_paciente(id){
+  pool.getConnection()
+    .then(conn => {
+
+      conn.query("DELETE * FROM RESIDENCIA.rs_datospersona WHERE RSD_ID = " + id)
+        .then((rows) => {
+          console.log(rows); //[ {val: 1}, meta: ... ]
+          //Table must have been created before
+          // " CREATE TABLE myTable (id int, val varchar(255)) "
+          //return conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
+          //cerrar modal
+          //$("#alta_paciente").modal("toggle");
         })
         .then((res) => {
           console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
