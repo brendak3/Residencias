@@ -1,85 +1,69 @@
 $(document).ready(function(){
-  //HighChartExample();
-  //Metodo para dibujar las graficas
-  // var ctx = document.getElementById('myChart').getContext('2d');
-  // myChart = new Chart(ctx, {
-  //     type: 'line',
-  //     data: {
-  //         labels: ['Read'],
-  //         datasets: [{
-  //             label: 'E.E.G. Read Signal 1',
-  //             data: [],
-  //             fill: false,
-  //             backgroundColor: [
-  //                 'rgba(255, 99, 132, 1)' //rgb(255, 255, 255, 0.2)
-  //             ],
-  //             borderColor: [
-  //                 'rgba(255, 99, 132, 1)'
-  //             ],
-  //             borderWidth: 1
-  //         },
-  //         {
-  //             label: 'E.E.G. Read Signal 2',
-  //             data: [],
-  //             fill: false,
-  //             backgroundColor: [
-  //                 'rgba(34, 139, 34, 1)' //rgb(255, 255, 255, 0.2)
-  //             ],
-  //             borderColor: [
-  //                 'rgba(0,100,0, 1)'
-  //             ],
-  //             borderWidth: 1
-  //         }
-  //       ]
-  //     },
-  //     options: {
-  //         scales: {
-  //             yAxes: [{
-  //                 ticks: {
-  //                     beginAtZero: true
-  //                 }
-  //             }]
-  //         }
-  //     }
-  // });
+  $('#setup_test').modal('toggle');
 
-  //Inicializa la lecutra de Datos
-  $('#start').click(function(){
-    //StartTest();
+  //Consulto todos los pacientes para rellenar el select
+  Pacientes();
+  Emotions();
+  ListPorts();
+  
+  //Cuando una opcion es seleccionada
+  $('#emotion_select').change(function(){
+    $('#video').empty();
+    Videos($('#emotion_select option:selected').val());
+  });
+
+  //Refrescar el multiselect
+  $('#refresh').click(function(){
+    $("#board_com").empty()
     ListPorts();
   });
-
-  //Inicializo el boton para cerrar proceso de lectura de señal
-  $('#stop').click(function(){
-    StopTest();
-  });
-
   //Inicializo Cyton para su uso
   const ourBoard = new Cyton();
 });
+
+//librerías
 //Lo requerido para las graficas
 var Chart = require('chart.js');
 
 //requerido para graficas de highcharts
 var Highcharts = require('highcharts');
 
+//Libreria para el puerto serial
+const serialport = require('serialport')
+
+//BD
+const mariadb = require('mariadb');
+
+//Conexion a BD
+const pool = mariadb.createPool({
+     database: 'residencia',
+     host: '127.0.0.1',
+     user:'root',
+     password: '',
+     connectionLimit: 5
+});
+
+//Variables
+//Grafica
 var myChart;
 //Para leer las señales de la placa
-
 var portName;
 
+//Encontrar si hay puertos COM disponibles
 function ListPorts(){
-  ourBoard = new Cyton();
-  ourBoard.autoFindOpenBCIBoard().then(portName => {
-    if (portName) {
-      /**
-       * Connect to the board with portName
-       * i.e. ourBoard.connect(portName).....
-       */
-       console.log("Conected");
+  serialport.list((err, ports) => {
+    if (ports.length === 0) {
+      //console.log("No ports discovered");
+      $("#board_com").append(new Option("No ports discovered", 0));
+    }
+    else if (err) {
+      console.log(err);
     } else {
-      /**Unable to auto find OpenBCI board*/
-      console.log("Not conected");
+      //console.log('ports', ports);
+      //console.log(ports[0].comName);
+      for (var i = 0; i < ports.length; i++) {
+        $("#board_com").append(new Option(ports[i].comName, ports[i].comName));
+      }
     }
   });
 }
@@ -206,4 +190,83 @@ function ChartJQ() {
           }
       }
   });
+}
+
+/*Llenar los SELECT del modal*/
+function Pacientes(){
+  pool.getConnection()
+    .then(conn => {
+      conn.query("SELECT RSD_ID, RSD_NAME, RSD_LASTNAME FROM RESIDENCIA.rs_datospersona")
+        .then((rows) => {
+          //console.log(rows); //[ {val: 1}, meta: ... ]
+          for (var i = 0; i < rows.length; i++) {
+            $("#patient").append(new Option(rows[i].RSD_NAME + " " + rows[i].RSD_LASTNAME, rows[i].RSD_ID));
+          }
+        })
+        .then((res) => {
+          //console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
+          //alert(res);
+          conn.end();
+        })
+        .catch(err => {
+          //handle error
+          console.log(err);
+          conn.end();
+        })
+
+    }).catch(err => {
+      //not connected
+    });
+}
+
+function Emotions(){
+  pool.getConnection()
+    .then(conn => {
+      conn.query("SELECT DISTINCT(RSC_EMOCION) FROM RESIDENCIA.rs_catalog_video")
+        .then((rows) => {
+          //console.log(rows); //[ {val: 1}, meta: ... ]
+          for (var i = 0; i < rows.length; i++) {
+            $("#emotion_select").append(new Option(rows[i].RSC_EMOCION, rows[i].RSC_EMOCION));
+          }
+        })
+        .then((res) => {
+          //console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
+          //alert(res);
+          conn.end();
+        })
+        .catch(err => {
+          //handle error
+          console.log(err);
+          conn.end();
+        })
+
+    }).catch(err => {
+      //not connected
+    });
+}
+
+function Videos(emotion){
+  pool.getConnection()
+    .then(conn => {
+      conn.query("SELECT RSC_ARTISTA, RSC_CANCION, RSC_EMOCION FROM RESIDENCIA.rs_catalog_video WHERE RSC_EMOCION = '" + emotion + "'")
+        .then((rows) => {
+          //console.log(rows); //[ {val: 1}, meta: ... ]
+          for (var i = 0; i < rows.length; i++) {
+            $("#video").append(new Option(rows[i].RSC_CANCION + " - " + rows[i].RSC_ARTISTA, rows[i].RSC_EMOCION));
+          }
+        })
+        .then((res) => {
+          //console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
+          //alert(res);
+          conn.end();
+        })
+        .catch(err => {
+          //handle error
+          console.log(err);
+          conn.end();
+        })
+
+    }).catch(err => {
+      //not connected
+    });
 }

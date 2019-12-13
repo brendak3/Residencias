@@ -86,7 +86,7 @@ const templateMenu = [
     label: 'File',
     submenu: [
       {
-        label: 'Test Window',
+        label: 'New Test',
         accelerator: process.platform === 'darwin' ? 'Command+N' : 'Ctrl+N',
         click: () =>{
           createNewWindow();
@@ -94,7 +94,7 @@ const templateMenu = [
         }
       },
       {
-        label:'Alta Window',
+        label:'Calibrate Board',
         accelerator: process.platform === 'darwin' ? 'Command+A' : 'Ctrl+A',
         click: () =>{
           AltaWindow();
