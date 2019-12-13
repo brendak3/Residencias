@@ -15,12 +15,12 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-xs-6">
-          <label for="patient_name">Name:</label>
+          <label for="patient_name">Patient:</label>
           <input id="patient_name" class="form-control" type="text" readonly="readonly" value="" />
         </div>
         <div class="col-md-6 col-xs-6">
-          <label for="patient_lastname">Lastname:</label>
-          <input id="patient_lastname" class="form-control" type="text" readonly="readonly" value="" />
+          <!-- <label for="patient_lastname">Lastname:</label>
+          <input id="patient_lastname" class="form-control" type="text" readonly="readonly" value="" /> -->
         </div>
       </div>
       <div class="row">
@@ -37,19 +37,73 @@
           <input id="emotion" class="form-control" type="text" readonly="readonly" value="" />
         </div>
       </div>
+      <br/>
       <!--Grafica-->
       <div class="row">
-        <div class="col-md-12 col-xs-12">
-          <canvas id="canvas" width="300" height="300"></canvas>
+        <!--Grafica-->
+        <div class="col-md-6 col-xs-6">
+          <canvas id="myChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-md-6 col-xs-6">
+          <!--Opciones-->
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <h5><b>Options</b></h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <button id="start" type="button" class="btn btn-success">Start</button>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <button id="stop" type="button" class="btn btn-danger">Stop</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+            		<span class="label">duration:</span>
+            		<span id="durationValue" class="value">20000</span>
+            		<span><input type="range" min="1000" max="60000" step="100" value="20000" id="duration" class="control"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <span class="label">ttl:</span>
+              <span id="ttlValue" class="value">60000</span>
+              <span><input type="range" min="1000" max="60000" step="100" value="60000" id="ttl" class="control"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <span class="label">refresh:</span>
+              <span id="refreshValue" class="value">100</span>
+              <span><input type="range" min="50" max="3000" step="50" value="100" id="refresh" class="control"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <span class="label">delay:</span>
+              <span id="delayValue" class="value">500</span>
+              <span><input type="range" min="0" max="5000" step="100" value="500" id="delay" class="control"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <span class="label">frameRate:</span>
+              <span id="frameRateValue" class="value">30</span>
+              <span><input type="range" min="1" max="60" step="1" value="30" id="frameRate" class="control"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <span class="label">pause:</span>
+              <span id="pauseValue" class="value">false</span>
+              <span><input type="checkbox" id="pause" class="control"></span>
+            </div>
+          </div>
         </div>
       </div>
       <!--Grafica-->
-      <!--Modal-->
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-        Launch static backdrop modal
-      </button>
-
       <!-- Modal -->
       <div id="setup_test" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -110,10 +164,13 @@
     <!--Importamos el script-->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 
+    <script type="text/javascript" src="../scripts/datastream/moment.js"></script>
     <script src="../scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../scripts/test.js"></script>
     <script type="text/javascript" src="../scripts/openbci.js"></script>
+    <!--Plugin de ChartJs-->
+    <script type="text/javascript" src="../scripts/datastream/chartjs-plugin-streaming.js"></script>
 
     <script>if (window.module) module = window.module;</script>
   </body>

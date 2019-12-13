@@ -238,7 +238,8 @@ function TablaPruebas(){
               "<th>Name</th>" +
               "<th>Date</th>" +
               "<th>Duration</th>" +
-              "<th>X</th>";
+              "<th>Expected Emotion</th>" +
+              "<th>Options</th>";
 
   $('#trows').html(innerRow);
 
@@ -250,7 +251,7 @@ function TablaPruebas(){
 function InfoTablaTest(){
   pool.getConnection()
   .then(conn => {
-    conn.query("SELECT RSP_ID, RSD_NAME, RSD_LASTNAME, DATE_FORMAT(RSP_FECHA,\'%c/%e/%Y %h:%i:%s %p\') as RSP_FECHA, duracion_prueba FROM RESIDENCIA.rs_prueba A join RESIDENCIA.rs_datospersona B ON A.RSP_PERSONA_ID = B.RSD_ID")
+    conn.query("SELECT RSP_ID, RSD_NAME, RSD_LASTNAME, DATE_FORMAT(RSP_FECHA,\'%c/%e/%Y %h:%i:%s %p\') as RSP_FECHA, duracion_prueba, RSP_EMOCION FROM RESIDENCIA.rs_prueba A join RESIDENCIA.rs_datospersona B ON A.RSP_PERSONA_ID = B.RSD_ID")
     .then((rows) => {
       //console.log(rows);
       json = JSON.stringify(rows);
@@ -267,7 +268,11 @@ function InfoTablaTest(){
                     "<td>" + result[i].RSD_NAME + " " + result[i].RSD_LASTNAME + "</td>" +
                     "<td>" + result[i].RSP_FECHA + "</td>" +
                     "<td>" + result[i].duracion_prueba + "</td>" +
-                    "<td>" + "-" + "</td>" +
+                    "<td>" + result[i].RSP_EMOCION + "</td>" +
+                    "<td>"+
+                    "<button id=\"consultar_" + result[i].RSP_ID + "\" onclick=\"ConsultarPaciente(this.value)\" value=\""+ result[i].RSP_ID + "\" type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-file-text\"></i></button>" +
+                    "<button id=\"eliminar_" + result[i].RSP_ID + "\" onclick=\"EliminarPaciente(this.value)\" value=\""+ result[i].RSP_ID + "\" type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-trash\"></i></button>" +
+                    "</td>"
                     "</tr>";
 
         $('#tbody').append(innerBody);
@@ -322,8 +327,8 @@ function TablaPacientes(){
                     "<td>" + result[i].RSD_GENDER + "</td>" +
                     "<td>" + result[i].RSD_DATE + "</td>" +
                     "<td> <button id=\"editar_" + result[i].RSD_ID + "\" onclick=\"EditarPaciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i></button>" +
-                    "<button id=\"consultar_" + result[i].RSD_ID + "\" onclick=\"ConsultarPaciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-file-text\"></i></button>" +
-                    "<button id=\"eliminar_" + result[i].RSD_ID + "\" onclick=\"EliminarPaciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-trash\"></i></button>" +
+                    "<button id=\"consultar_" + result[i].RSD_ID + "\" onclick=\"Consultar_paciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-file-text\"></i></button>" +
+                    "<button id=\"eliminar_" + result[i].RSD_ID + "\" onclick=\"Eliminar_paciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-trash\"></i></button>" +
                     "</td>" +
                     "</tr>";
 
@@ -383,14 +388,6 @@ function EditarPaciente(id){
     });
 }
 
-function ConsultarPaciente(id){
-  console.log(id);
-}
-
-function EliminarPaciente(id){
-  console.log(id);
-}
-
 function UpdatePaciente(){
   pool.getConnection()
     .then(conn => {
@@ -413,7 +410,7 @@ function UpdatePaciente(){
         })
         .then((res) => {
           console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
-          alert(res);
+          alert('Register successfully update.');
           conn.end();
         })
         .catch(err => {
@@ -443,7 +440,8 @@ function InsertPaciente(){
         })
         .then((res) => {
           console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
-          alert(res);
+          //alert(res);
+          alert('Register successfully inserted.');
           conn.end();
         })
         .catch(err => {
@@ -458,6 +456,10 @@ function InsertPaciente(){
 }
 
 function Consultar_paciente(id){
+  $('#alta_paciente').modal('toggle');
+  $('#changes').hide();
+  $('#save').hide();
+
   pool.getConnection()
     .then(conn => {
 
@@ -468,11 +470,20 @@ function Consultar_paciente(id){
           // " CREATE TABLE myTable (id int, val varchar(255)) "
           //return conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
           //cerrar modal
-          $("#alta_paciente").modal("toggle");
+          //$("#alta_paciente").modal("toggle");
+          $('#id_paciente').val(id);
+
+          $('#name').val(rows[0].RSD_NAME);
+          $('#lastname').val(rows[0].RSD_LASTNAME);
+          $('#age').val(rows[0].RSD_AGE);
+          $('#email').val(rows[0].RSD_EMAIL);
+          $('#occupation').val(rows[0].RSD_OCCUPATION);
+          $('#inputBirthdate').val(rows[0].RSD_DATE);
+          $('#inputState').val(rows[0].RSD_GENDER);
         })
         .then((res) => {
           console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
-          alert(res);
+          //alert(res);
           conn.end();
         })
         .catch(err => {
@@ -487,30 +498,32 @@ function Consultar_paciente(id){
 }
 
 function Eliminar_paciente(id){
-  pool.getConnection()
-    .then(conn => {
-
-      conn.query("DELETE * FROM RESIDENCIA.rs_datospersona WHERE RSD_ID = " + id)
-        .then((rows) => {
-          console.log(rows); //[ {val: 1}, meta: ... ]
-          //Table must have been created before
-          // " CREATE TABLE myTable (id int, val varchar(255)) "
-          //return conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
-          //cerrar modal
-          //$("#alta_paciente").modal("toggle");
-        })
-        .then((res) => {
-          console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
-          alert(res);
-          conn.end();
-        })
-        .catch(err => {
-          //handle error
-          console.log(err);
-          conn.end();
-        })
-
-    }).catch(err => {
-      //not connected
-    });
+  confirm('Are you sure you want to delete this record?')
+  alert('Register successfully deleted.')
+  // pool.getConnection()
+  //   .then(conn => {
+  //
+  //     conn.query("DELETE * FROM RESIDENCIA.rs_datospersona WHERE RSD_ID = " + id)
+  //       .then((rows) => {
+  //         console.log(rows); //[ {val: 1}, meta: ... ]
+  //         //Table must have been created before
+  //         // " CREATE TABLE myTable (id int, val varchar(255)) "
+  //         //return conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
+  //         //cerrar modal
+  //         //$("#alta_paciente").modal("toggle");
+  //       })
+  //       .then((res) => {
+  //         console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
+  //         alert(res);
+  //         conn.end();
+  //       })
+  //       .catch(err => {
+  //         //handle error
+  //         console.log(err);
+  //         conn.end();
+  //       })
+  //
+  //   }).catch(err => {
+  //     //not connected
+  //   });
 }
