@@ -16,6 +16,7 @@ $(document).ready(function(){
 
   //Cuando el boton de Ok del modal sea pulsado
   $('#start_test').click(function(){
+    VideoWindow();
     $('#patient_name').val($('#patient option:selected').text());
     $('#video_name').val($('#video option:selected').text());
     $('#video_duration').val('3:50 min');
@@ -382,4 +383,34 @@ function Videos(emotion){
     }).catch(err => {
       //not connected
     });
+}
+
+
+function VideoWindow(){
+  //Save the window into a variable
+  var window = remote.getCurrentWindow();
+  //Create the window for displaying the video
+  let child = new BrowserWindow({ parent: window})
+  child.loadURL(url.format({
+    parent: win,
+    width: 800,
+    height: 600,
+    pathname: path.join(__dirname, '/loginmodal.html'),
+    protocol: 'file',
+    slashes: true
+  }))
+
+  child.once('ready-to-show', () => {
+    child.show()
+  })
+
+  child.on('closed', () => {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    win = null
+
+    /*El del video*/
+    //app.quit();
+  })
 }

@@ -1,13 +1,16 @@
-const { app, BrowserWindow, Menu, globalShortcut } = require('electron')
+/*Require from Electron.js*/
+const { app, BrowserWindow, Menu, globalShortcut, ipcMain } = require('electron')
 
 
-/*Como el del video*/
+/*Requires from Node.js*/
 const url = require('url');
 const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
+//Main Window
 let win
+//Modal Window LEGACY
 let child
 
 function createWindow () {
@@ -32,7 +35,7 @@ function createWindow () {
   // }))
   //Maximizar la pantalla
 
-  /*Como dicta el del videl*/
+  /*Load the html for the view*/
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'views/index.html'),
     protocol: 'file',
@@ -46,7 +49,7 @@ function createWindow () {
   // Open the DevTools.
   win.webContents.openDevTools()
 
-  /*El menu de navegacion*/
+  /*Navigation menu for the main window*/
   const mainMenu = Menu.buildFromTemplate(templateMenu);
   Menu.setApplicationMenu(mainMenu);
 
@@ -112,7 +115,7 @@ const templateMenu = [
   }
 ]
 
-//Si se esta en macOS
+//If the OS is macOS
 if (process.plataform === 'darwin') {
   templateMenu.unshift({
     label: app.getName()
@@ -145,11 +148,13 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
+//Window for making a new test
 let newWindow
 /*Para crear una nueva ventana*/
 function createNewWindow(){
   /*Crea una nueva ventana*/
   newWindow = new BrowserWindow({
+    parent: win,
     width: 1000,
     height: 800,
     title: 'New Window',
@@ -160,25 +165,36 @@ function createNewWindow(){
 
   newWindow.webContents.openDevTools()
 
-  /*Quitar el menu*/
+  /*Quits the menu labels*/
   newWindow.setMenu(null);
-  /*Carga la nueva vista*/
+  /*Loads the new view*/
   newWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'views/test.html'),
     protocol: 'file',
     slashes: true
   }));
-  /*Para solo cerrar la ventana emergente. Se limpia la ventana creada*/
+
+  // Attach event listener to event that requests to update something in the second window
+  // from the first window
+  ipcMain.on('request-update-label-in-second-window', (event, arg) => {
+      // Request to update the label in the renderer process of the second window
+      secondWindow.webContents.send('action-update-label', arg);
+  });
+
+
+  /*For closing the emergent window*/
   newWindow.on('close', () => {
     newWindow = null;
   });
 }
 
+//Window for calibrating the board
 let altaWindow
 /*Para crear una nueva ventana*/
 function AltaWindow(){
   /*Crea una nueva ventana*/
   altaWindow = new BrowserWindow({
+    parent: win,
     width: 800,
     height: 600,
     title: 'Alta Usuario',
