@@ -172,11 +172,13 @@ function createNewWindow(){
     slashes: true
   }));
 
+  VideoWindow();
+
   // Attach event listener to event that requests to update something in the second window
   // from the first window
   ipcMain.on('request-update-label-in-second-window', (event, arg) => {
       // Request to update the label in the renderer process of the second window
-      secondWindow.webContents.send('action-update-label', arg);
+      videoWindow.webContents.send('action-update-label', arg);
   });
 
 
@@ -212,4 +214,40 @@ function AltaWindow(){
   altaWindow.on('close', () => {
     altaWindow = null;
   });
+}
+
+//Window for video playing
+let videoWindow;
+function VideoWindow() {
+  videoWindow = new BrowserWindow({
+    parent: newWindow,
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    },
+  });
+
+  videoWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'views/videoplaying.html'),
+    protocol: 'file',
+    slashes: true
+  }));
+
+  videoWindow.webContents.openDevTools();
+
+  videoWindow.once('ready-to-show', () => {
+    videoWindow.show()
+  });
+
+  videoWindow.on('closed', () => {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    win = null
+
+    /*El del video*/
+    //app.quit();
+  })
+
 }

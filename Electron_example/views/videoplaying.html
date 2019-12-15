@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-xs-12">
-          <h1 id="titulo">DataSet</h1>
+          <h1 id="titulo">Playing Video</h1>
         </div>
       </div>
       <!--iframe video-->
@@ -40,6 +40,7 @@
             //label.innerHTML = arg.message;
             //label.style.color = arg.color;
             //label.style.backgroundColor = arg.backgroundColor;
+            $('#video').attr("src", arg.message);
         });
     </script>
     <script>if (window.module) module = window.module;</script>

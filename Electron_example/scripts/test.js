@@ -13,7 +13,7 @@ $(document).ready(function(){
   Pacientes();
   Emotions();
   ListPorts();
-
+  Videos($('#emotion_select option:selected').val());
   //Cuando el boton de Ok del modal sea pulsado
   $('#start_test').click(function(){
     $('#patient_name').val($('#patient option:selected').text());
@@ -21,7 +21,7 @@ $(document).ready(function(){
     $('#video_duration').val('3:50 min');
     $('#emotion').val($('#emotion_select option:selected').val());
     $('#setup_test').modal('toggle');
-    VideoWindow();
+    //VideoWindow();
   });
 
   //Cuando una opcion es seleccionada
@@ -47,6 +47,7 @@ var Chart = require('chart.js');
 const url = require('url');
 const path = require('path');
 const remote = require('electron').remote;
+//const { ipcMain } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
 //requerido para graficas de highcharts
@@ -368,11 +369,11 @@ function Emotions(){
 function Videos(emotion){
   pool.getConnection()
     .then(conn => {
-      conn.query("SELECT RSC_ARTISTA, RSC_CANCION, RSC_EMOCION FROM RESIDENCIA.rs_catalog_video WHERE RSC_EMOCION = '" + emotion + "'")
+      conn.query("SELECT RSC_ARTISTA, RSC_CANCION, RSC_EMOCION, RSC_ENLACE FROM RESIDENCIA.rs_catalog_video WHERE RSC_EMOCION = '" + emotion + "'")
         .then((rows) => {
           //console.log(rows); //[ {val: 1}, meta: ... ]
           for (var i = 0; i < rows.length; i++) {
-            $("#video").append(new Option(rows[i].RSC_CANCION + " - " + rows[i].RSC_ARTISTA, rows[i].RSC_EMOCION));
+            $("#video").append(new Option(rows[i].RSC_CANCION + " - " + rows[i].RSC_ARTISTA, rows[i].RSC_ENLACE));
           }
         })
         .then((res) => {
@@ -392,37 +393,44 @@ function Videos(emotion){
 }
 
 
-function VideoWindow(){
-  //Save the window into a variable
-  var window = remote.getCurrentWindow();
-  //Create the window for displaying the video
-  let child = new BrowserWindow({
-    parent: window,
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true
-    },
-  })
-  child.loadURL(url.format({
-    pathname: path.join(__dirname, '/videoplaying.html'),
-    protocol: 'file',
-    slashes: true
-  }))
-
-  child.webContents.openDevTools();
-
-  child.once('ready-to-show', () => {
-    child.show()
-  })
-
-  child.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    win = null
-
-    /*El del video*/
-    //app.quit();
-  })
-}
+// function VideoWindow(){
+//   //Save the window into a variable
+//   var window = remote.getCurrentWindow();
+//   //Create the window for displaying the video
+//   let child = new BrowserWindow({
+//     parent: window,
+//     width: 800,
+//     height: 600,
+//     webPreferences: {
+//       nodeIntegration: true
+//     },
+//   })
+//   child.loadURL(url.format({
+//     pathname: path.join(__dirname, '/videoplaying.html'),
+//     protocol: 'file',
+//     slashes: true
+//   }))
+//
+//   child.webContents.openDevTools();
+//
+//   child.once('ready-to-show', () => {
+//     child.show()
+//   })
+//
+//   // Attach event listener to event that requests to update something in the second window
+//   // from the first window
+//   //ipcMain.on('request-update-label-in-second-window', (event, arg) => {
+//       // Request to update the label in the renderer process of the second window
+//     //  secondWindow.webContents.send('action-update-label', arg);
+//   //});
+//
+//   child.on('closed', () => {
+//     // Dereference the window object, usually you would store windows
+//     // in an array if your app supports multi windows, this is the time
+//     // when you should delete the corresponding element.
+//     win = null
+//
+//     /*El del video*/
+//     //app.quit();
+//   })
+// }
