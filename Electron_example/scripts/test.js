@@ -16,12 +16,12 @@ $(document).ready(function(){
 
   //Cuando el boton de Ok del modal sea pulsado
   $('#start_test').click(function(){
-    VideoWindow();
     $('#patient_name').val($('#patient option:selected').text());
     $('#video_name').val($('#video option:selected').text());
     $('#video_duration').val('3:50 min');
     $('#emotion').val($('#emotion_select option:selected').val());
     $('#setup_test').modal('toggle');
+    VideoWindow();
   });
 
   //Cuando una opcion es seleccionada
@@ -42,6 +42,12 @@ $(document).ready(function(){
 //librerías
 //Lo requerido para las graficas
 var Chart = require('chart.js');
+
+//Manejador de ventas
+const url = require('url');
+const path = require('path');
+const remote = require('electron').remote;
+const BrowserWindow = remote.BrowserWindow;
 
 //requerido para graficas de highcharts
 var Highcharts = require('highcharts');
@@ -390,15 +396,21 @@ function VideoWindow(){
   //Save the window into a variable
   var window = remote.getCurrentWindow();
   //Create the window for displaying the video
-  let child = new BrowserWindow({ parent: window})
-  child.loadURL(url.format({
-    parent: win,
+  let child = new BrowserWindow({
+    parent: window,
     width: 800,
     height: 600,
-    pathname: path.join(__dirname, '/loginmodal.html'),
+    webPreferences: {
+      nodeIntegration: true
+    },
+  })
+  child.loadURL(url.format({
+    pathname: path.join(__dirname, '/videoplaying.html'),
     protocol: 'file',
     slashes: true
   }))
+
+  child.webContents.openDevTools();
 
   child.once('ready-to-show', () => {
     child.show()

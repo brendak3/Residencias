@@ -57,7 +57,7 @@
             </div>
             <div class="col-md-6 col-xs-6">
               <button id="stop" type="button" class="btn btn-danger">Stop</button>
-              <button id="send" type="button" class="btn btn-danger">Send new window</button>
+              <button id="btn" type="button" class="btn btn-danger">Send new window</button>
             </div>
           </div>
           <div class="row">
@@ -172,6 +172,20 @@
     <script type="text/javascript" src="../scripts/openbci.js"></script>
     <!--Plugin de ChartJs-->
     <script type="text/javascript" src="../scripts/datastream/chartjs-plugin-streaming.js"></script>
+
+    <script>
+       const { ipcRenderer } = require('electron');
+
+       document.getElementById("btn").addEventListener("click", () => {
+           // Some data that will be sent to the main process
+           let Data = {
+               message: 'Hello from window 1',
+           };
+
+           // Trigger the event listener action to this event in the renderer process and send the data
+           ipcRenderer.send('request-update-label-in-second-window', Data);
+       }, false);
+   </script>
 
     <script>if (window.module) module = window.module;</script>
   </body>

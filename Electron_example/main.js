@@ -1,7 +1,5 @@
 /*Require from Electron.js*/
 const { app, BrowserWindow, Menu, globalShortcut, ipcMain } = require('electron')
-
-
 /*Requires from Node.js*/
 const url = require('url');
 const path = require('path');
