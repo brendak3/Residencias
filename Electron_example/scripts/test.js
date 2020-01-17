@@ -202,8 +202,13 @@ function StartTest(){
             //counter++;
             //myChart.update();
 <<<<<<< HEAD
+<<<<<<< HEAD
             signal_one = (sample.channelData[0] * 1000000);
             signal_two = (sample.channelData[1] * 1000000);
+=======
+            signal_one = (sample.channelData[0]*1000000);
+            signal_two = (sample.channelData[6]*1000000);
+>>>>>>> eed866119ff0717a90184ca211befce13303f770
 =======
             signal_one = (sample.channelData[0]*1000000);
             signal_two = (sample.channelData[6]*1000000);
