@@ -173,12 +173,12 @@ function ListPorts(){
 function StartTest(){
   //Abrir el puerto para openbci
   ourBoard = new Cyton({
-    simulate: true
+    simulate: false
   });
 
   //Simulo que leo del puerto
-  portName = constants.OBCISimulatorPortName;
-
+  //portName = constants.OBCISimulatorPortName;
+  portName = "COM3";
   let counter = 0;
   ourBoard.connect(portName).then(function (){
     console.log('Console');
@@ -200,8 +200,8 @@ function StartTest(){
 
             //counter++;
             //myChart.update();
-            signal_one = sample.channelData[0];
-            signal_two = sample.channelData[1];
+            signal_one = (sample.channelData[0]*1000000);
+            signal_two = (sample.channelData[6]*1000000);
             //console.log(sample.channelData[0]);
           }
       });
