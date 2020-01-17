@@ -20,6 +20,7 @@ $(document).ready(function(){
     $('#video_name').val($('#video option:selected').text());
     $('#video_duration').val('3:50 min');
     $('#emotion').val($('#emotion_select option:selected').val());
+    //var com =
     $('#setup_test').modal('toggle');
     //VideoWindow();
   });
@@ -163,6 +164,7 @@ function ListPorts(){
     } else {
       //console.log('ports', ports);
       //console.log(ports[0].comName);
+      //$("#board_com").append(new Option("Simulated Data", "simulated"));
       for (var i = 0; i < ports.length; i++) {
         $("#board_com").append(new Option(ports[i].comName, ports[i].comName));
       }
@@ -174,12 +176,13 @@ function ListPorts(){
 function StartTest(){
   //Abrir el puerto para openbci
   ourBoard = new Cyton({
-    simulate: false
+    simulate: true
+    //simulate: false
   });
 
   //Simulo que leo del puerto
-  //portName = constants.OBCISimulatorPortName;
-  portName = "COM3";
+  portName = constants.OBCISimulatorPortName;
+  //portName = "COM3";
   let counter = 0;
   ourBoard.connect(portName).then(function (){
     console.log('Console');
@@ -201,18 +204,8 @@ function StartTest(){
 
             //counter++;
             //myChart.update();
-<<<<<<< HEAD
-<<<<<<< HEAD
-            signal_one = (sample.channelData[0] * 1000000);
-            signal_two = (sample.channelData[1] * 1000000);
-=======
-            signal_one = (sample.channelData[0]*1000000);
-            signal_two = (sample.channelData[6]*1000000);
->>>>>>> eed866119ff0717a90184ca211befce13303f770
-=======
-            signal_one = (sample.channelData[0]*1000000);
-            signal_two = (sample.channelData[6]*1000000);
->>>>>>> eed866119ff0717a90184ca211befce13303f770
+            signal_one = (sample.channelData[1] * 1000000);
+            signal_two = (sample.channelData[6] * 1000000);
             //console.log(sample.channelData[0]);
           }
       });
