@@ -297,7 +297,10 @@ function InfoTablaTest(){
 function TablaPacientes(){
   innerRow = "";
   //document.getElementById('trows').innerHTML = "";
+  //Limpia los nombres de las columnas
   $('#trows').html('');
+
+  //Nombre de las columnas nuevas
   innerRow = "<th>#</th>" +
               "<th>Name</th>" +
               "<th>Age</th>" +
@@ -305,6 +308,7 @@ function TablaPacientes(){
               "<th>Date</th>" +
               "<th>Options</th>";
 
+  //Muestra los 
   $('#trows').html(innerRow);
 
   pool.getConnection()

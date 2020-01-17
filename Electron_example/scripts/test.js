@@ -99,6 +99,7 @@ var config = {
       backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
       borderColor: chartColors.blue,
       fill: false,
+      lineTension: 0,
       cubicInterpolationMode: 'monotone',
       data: []
     }]
@@ -200,8 +201,8 @@ function StartTest(){
 
             //counter++;
             //myChart.update();
-            signal_one = sample.channelData[0];
-            signal_two = sample.channelData[1];
+            signal_one = (sample.channelData[0] * 1000000);
+            signal_two = (sample.channelData[1] * 1000000);
             //console.log(sample.channelData[0]);
           }
       });
