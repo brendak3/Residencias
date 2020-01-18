@@ -21,6 +21,13 @@ $(document).ready(function(){
     $('#video_duration').val('3:50 min');
     $('#emotion').val($('#emotion_select option:selected').val());
     $('#setup_test').modal('toggle');
+
+    //Seleccion de puerto para la tarjeta
+    var selected_port = $("#board_com option:selected").val();
+    if (selected_port != "simulate") {
+      portName = selected_port;
+      simulate = false;
+    }
     //VideoWindow();
   });
 
@@ -38,6 +45,9 @@ $(document).ready(function(){
   //Inicializo Cyton para su uso
   const ourBoard = new Cyton();
 });
+//Variables de configuracion
+//Para caputra de las señales de la placa
+var portName = constants.OBCISimulatorPortName , simulated = true;
 
 //librerías
 //Lo requerido para las graficas
@@ -148,8 +158,6 @@ var config = {
 };
 /***********Grafica*************/
 
-//Para leer las señales de la placa
-var portName;
 
 //Encontrar si hay puertos COM disponibles
 function ListPorts(){
@@ -163,6 +171,7 @@ function ListPorts(){
     } else {
       //console.log('ports', ports);
       //console.log(ports[0].comName);
+      $("#board_com").append(new Option("OBCSimulatorPortName", "simulate"))
       for (var i = 0; i < ports.length; i++) {
         $("#board_com").append(new Option(ports[i].comName, ports[i].comName));
       }
@@ -174,11 +183,11 @@ function ListPorts(){
 function StartTest(){
   //Abrir el puerto para openbci
   ourBoard = new Cyton({
-    simulate: true
+    simulate: simulate
   });
 
   //Simulo que leo del puerto
-  portName = constants.OBCISimulatorPortName;
+  //portName = constants.OBCISimulatorPortName;
 
   let counter = 0;
   ourBoard.connect(portName).then(function (){
@@ -201,14 +210,16 @@ function StartTest(){
 
             //counter++;
             //myChart.update();
-            signal_one = (sample.channelData[0] * 1000000);
-            signal_two = (sample.channelData[1] * 1000000);
+            signal_one = sample.channelData[0];
+            signal_two = sample.channelData[1];
+            // signal_one = (sample.channelData[0] * 1000000);
+            // signal_two = (sample.channelData[1] * 1000000);
             //console.log(sample.channelData[0]);
           }
       });
     //});
   }).catch(function(err){
-    console.log("Pues no se pudo");
+    console.log("Error al conectar la placa: " + err);
   });
 }
 
