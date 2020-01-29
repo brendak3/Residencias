@@ -28,43 +28,31 @@ $(document).ready(function(){
     InsertPaciente();
   });
 
-  /*LEGACY*/
-  // $('#login').click(function(){
-  //   Login($('#email').val(), $('#password').val());
-  // });
-
-  //Abrir el modal
-  //ModalLogin();
-
-  /*Ventana Modal para LogIn*/
-  // document.getElementById('page').onload = function () {
-  //   const iframeWin = document.getElementById('page').contentWindow
-  //   iframeWin.require = window.require
-  // }
-
-  //Realiza query a la BD para llenar la tabla principal
-  TablaPruebas();
 
   $('#altausuario').click(function(){
     // $('#page').attr('src', '../views/altausuario.html');
     //Llena la tabla de usuarios para mostarla al usuarios
-    $('#title').html("Patients <small>List of patients.</small>");
-    $('#alta_usuario').show();
-    TablaPacientes();
+    // $('#title').html("Patients <small>List of patients.</small>");
+    // $('#alta_usuario').show();
+    // TablaPacientes();
+    $('#containerHTML').load('../views/tablapacientes.html');
   });
 
   /*Tabla de usuarios*/
   $('#tablapruebas').click(function(){
     //$('#page').attr('src', '../views/tablapruebas.html');
-    $('#title').html("Historial of Tests <small>List of the lates patient tests.</small>");
-    $('#alta_usuario').hide();
-    TablaPruebas();
+    // $('#title').html("Historial of Tests <small>List of the lates patient tests.</small>");
+    // $('#alta_usuario').hide();
+    // TablaPruebas();
+    $('#containerHTML').load('../views/tablapruebas.html');
   });
 
   /*Tabla de datos*/
   $('#grafica').click(function(){
     $('#page').attr('src', '../views/test.html');
   });
+
+  $('#containerHTML').load('../views/tablapruebas.html');
 });
 
 /*Variables, Importacion de Modulus, etc*/
@@ -117,117 +105,6 @@ const pool = mariadb.createPool({
      connectionLimit: 5
 });
 
-/*LEGACY YA NO EXISTE*/
-function Login(email, password){
-  pool.getConnection()
-    .then(conn =>
-      conn.query("SELECT COUNT(*) AS EXIST FROM RS_USER WHERE RS_EMAIL = '" + email + "' AND RS_PASSWORD = '" + password + "'")
-        .then((rows) => {
-          conn.end();
-          x = rows[0];
-          console.log(rows[0]);
-
-          console.log(x);
-
-          //Si es mayor a 0 entonces hubo un match
-          if (x['EXIST'] > 0) {
-            document.getElementById('body').innerHTML = "";
-            innerhtml =  "<ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">" +
-              "<li class=\"nav-item\">" +
-                "<a class=\"nav-link active\" id=\"home-tab\" data-toggle=\"tab\" href=\"#home\" role=\"tab\" aria-controls=\"home\" aria-selected=\"true\">Ultimas Pruebas </a>"+
-              "</li>" +
-              "<li class=\"nav-item\">" +
-                "<a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">Registrados</a>"+
-              "</li>" +
-              "<li class=\"nav-item\">"+
-                "<a class=\"nav-link\" id=\"contact-tab\" data-toggle=\"tab\" href=\"#contact\" role=\"tab\" aria-controls=\"contact\" aria-selected=\"false\">Etc.</a>" +
-              "</li>" +
-            "</ul>"+
-            "<div class=\"tab-content\" id=\"myTabContent\">" +
-              "<div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\"><p id=\"inner1\">Bunas</p></div>" +
-              "<div class=\"tab-pane fade\" id=\"profile\" role=\"tabpanel\" aria-labelledby=\"profile-tab\"><p id=\"inner2\"></p></div>" +
-              "<div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">Dias</div>" +
-            "</div>";
-
-            document.getElementById('body').innerHTML = innerhtml;
-
-            //Solo por ejemplo
-            $('#inner1').html("<table class=\"table\">" +
-              "<thead>" +
-                "<tr>" +
-                  "<th scope=\"col\">#</th>" +
-                  "<th scope=\"col\">First</th>" +
-                  "<th scope=\"col\">Last</th>" +
-                  "<th scope=\"col\">Handle</th>" +
-                "</tr>" +
-              "</thead>" +
-              "<tbody>" +
-                "<tr>" +
-                  "<th scope=\"row\">1</th>" +
-                  "<td>Mark</td>" +
-                  "<td>Otto</td>" +
-                  "<td>@mdo</td>" +
-                "</tr>" +
-                "<tr>" +
-                  "<th scope=\"row\">2</th>" +
-                  "<td>Jacob</td>" +
-                  "<td>Thornton</td>" +
-                  "<td>@fat</td>" +
-                "</tr>" +
-                "<tr>" +
-                  "<th scope=\"row\">3</th>" +
-                  "<td>Larry</td>" +
-                  "<td>the Bird</td>" +
-                  "<td>@twitter</td>" +
-                "</tr>" +
-              "</tbody>" +
-            "</table>");
-
-            //Borrar Despues
-            $('#inner2').html("<table class=\"table\">" +
-              "<thead>" +
-                "<tr>" +
-                  "<th scope=\"col\">#</th>" +
-                  "<th scope=\"col\">First</th>" +
-                  "<th scope=\"col\">Last</th>" +
-                  "<th scope=\"col\">Handle</th>" +
-                "</tr>" +
-              "</thead>" +
-              "<tbody>" +
-                "<tr>" +
-                  "<th scope=\"row\">1</th>" +
-                  "<td>Mark</td>" +
-                  "<td>Otto</td>" +
-                  "<td>@mdo</td>" +
-                "</tr>" +
-                "<tr>" +
-                  "<th scope=\"row\">2</th>" +
-                  "<td>Jacob</td>" +
-                  "<td>Thornton</td>" +
-                  "<td>@fat</td>" +
-                "</tr>" +
-                "<tr>" +
-                  "<th scope=\"row\">3</th>" +
-                  "<td>Larry</td>" +
-                  "<td>the Bird</td>" +
-                  "<td>@twitter</td>" +
-                "</tr>" +
-              "</tbody>" +
-            "</table>");
-          }
-          //Si no alerta que no se encontró en la BD
-          else{
-            alert("Wrong email or password");
-          }
-
-          return rows;
-        }
-      ))
-      .catch(err =>{
-        console.log(err);
-        conn.end();
-      })
-}
 
 /*Inicia la tabla de pruebas*/
 function TablaPruebas(){
@@ -244,54 +121,9 @@ function TablaPruebas(){
   $('#trows').html(innerRow);
 
   //Mando a llamar el método que va a la BD y me trae los registros
-  InfoTablaTest();
+  //InfoTablaTest();
 }
 
-/*Vista de Tests*/
-function InfoTablaTest(){
-  pool.getConnection()
-  .then(conn => {
-    conn.query("SELECT RSP_ID, RSD_NAME, RSD_LASTNAME, DATE_FORMAT(RSP_FECHA,\'%c/%e/%Y %h:%i:%s %p\') as RSP_FECHA, duracion_prueba, RSP_EMOCION FROM RESIDENCIA.rs_prueba A join RESIDENCIA.rs_datospersona B ON A.RSP_PERSONA_ID = B.RSD_ID")
-    .then((rows) => {
-      //console.log(rows);
-      json = JSON.stringify(rows);
-      //console.log(json);
-      //result = json;
-      //return json;
-      result = rows;
-      $('#tbody').html('');
-      for (var i = 0; i < result.length; i++) {
-        innerBody = "";
-
-        innerBody = "<tr>" +
-                    "<td>" + result[i].RSP_ID + "</td>" +
-                    "<td>" + result[i].RSD_NAME + " " + result[i].RSD_LASTNAME + "</td>" +
-                    "<td>" + result[i].RSP_FECHA + "</td>" +
-                    "<td>" + result[i].duracion_prueba + "</td>" +
-                    "<td>" + result[i].RSP_EMOCION + "</td>" +
-                    "<td>"+
-                    "<button id=\"consultar_" + result[i].RSP_ID + "\" onclick=\"ConsultarPaciente(this.value)\" value=\""+ result[i].RSP_ID + "\" type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-file-text\"></i></button>" +
-                    "<button id=\"eliminar_" + result[i].RSP_ID + "\" onclick=\"EliminarPaciente(this.value)\" value=\""+ result[i].RSP_ID + "\" type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-trash\"></i></button>" +
-                    "</td>"
-                    "</tr>";
-
-        $('#tbody').append(innerBody);
-      }
-    })
-    .then((res) => {
-      //console.log(res);
-      conn.end();
-    })
-    .catch(err => {
-      console.log(err);
-      conn.end();
-    })
-  }).catch(err =>{
-    console.log(err);
-  });
-  //console.log(result);
-  //return result;
-}
 
 /*Vista de Pacientes*/
 function TablaPacientes(){
@@ -308,7 +140,7 @@ function TablaPacientes(){
               "<th>Date</th>" +
               "<th>Options</th>";
 
-  //Muestra los 
+  //Muestra los
   $('#trows').html(innerRow);
 
   pool.getConnection()

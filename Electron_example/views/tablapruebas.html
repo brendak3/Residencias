@@ -3,8 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title><<h3>Tabla de Pruebas</h3></title>
-    <!--Bootstrap-->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
   </head>
   <body class="main">
     <div class="container body">
@@ -12,39 +10,23 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Age</th>
+                <th scope="col">#</th>
+                <th scope="col">Name pruebas</th>
+                <th scope="col">Date</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Expected Emotion</th>
+                <th scope="col">Options</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Male</td>
-                <td>24</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Male</td>
-                <td>39</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>Male</td>
-                <td>61</td>
-              </tr>
+            <tbody id="body_container">
+
             </tbody>
       </table>
     </div>
-</div>
-
-<!--JS Propio-->
-<!-- <script type="text/javascript" src="../scripts/master.js"></script> -->
-<!-- Insert this line after script imports -->
-<script>if (window.module) module = window.module;</script>
+  </div>
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <!--JS Propio-->
+  <script type="text/javascript" src="../scripts/vistas/tablapruebas.js"></script>
+  <script>if (window.module) module = window.module;</script>
   </body>
 </html>
