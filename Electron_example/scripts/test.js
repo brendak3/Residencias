@@ -47,7 +47,8 @@ $(document).ready(function(){
 });
 //Variables de configuracion
 //Para caputra de las señales de la placa
-var portName = constants.OBCISimulatorPortName , simulated = true;
+var portName = constants.OBCISimulatorPortName;
+var simulated = true;
 
 //librerías
 //Lo requerido para las graficas

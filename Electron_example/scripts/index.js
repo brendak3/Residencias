@@ -35,7 +35,7 @@ $(document).ready(function(){
     // $('#title').html("Patients <small>List of patients.</small>");
     // $('#alta_usuario').show();
     // TablaPacientes();
-    $('#containerHTML').load('../views/tablapacientes.html');
+    $('#containerHTML').load('../views/tabla_pacientes.html');
   });
 
   /*Tabla de usuarios*/
@@ -44,7 +44,7 @@ $(document).ready(function(){
     // $('#title').html("Historial of Tests <small>List of the lates patient tests.</small>");
     // $('#alta_usuario').hide();
     // TablaPruebas();
-    $('#containerHTML').load('../views/tablapruebas.html');
+    $('#containerHTML').load('../views/tabla_pruebas.html');
   });
 
   /*Tabla de datos*/
@@ -52,7 +52,7 @@ $(document).ready(function(){
     $('#page').attr('src', '../views/test.html');
   });
 
-  $('#containerHTML').load('../views/tablapruebas.html');
+  $('#containerHTML').load('../views/tabla_pruebas.html');
 });
 
 /*Variables, Importacion de Modulus, etc*/

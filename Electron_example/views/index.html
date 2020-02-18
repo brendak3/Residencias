@@ -14,7 +14,8 @@
     <link href="../styles/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../styles/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet">
-
+    <!--Datatable-->
+    <link rel="stylesheet" href="../scripts/DataTables/datatables.min.css">
 
     <!-- Custom Theme Style -->
     <link href="../styles/gentelella/build/css/custom.min.css" rel="stylesheet">
@@ -26,7 +27,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-signal"></i> <span>E.E.G. Data Set</span></a>
+              <a href="#" class="site_title"><i class="fa fa-signal"></i> <span>E.E.G. Data Set</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -111,41 +112,10 @@
                       <button id="alta_usuario" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add <i class="fa fa-plus"></i></button>
                       <br />
                       <!--Table-->
-                      <div class="table-responsive">
-                        <table class="table table-striped">
-                          <thead>
-                            <tr id="trows">
-                              <th scope="col">#</th>
-                              <th scope="col">First</th>
-                              <th scope="col">Last</th>
-                              <th scope="col">Handle</th>
-                            </tr>
-                          </thead>
-                          <tbody id="tbody">
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
                       <div id="containerHTML">
+
                       </div>
-                      <nav aria-label="Page navigation example">
+                      <!-- <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
                           <li class="page-item disabled">
                             <a class="page-link" href="#" tabindex="-1">Previous</a>
@@ -155,7 +125,7 @@
                             <a class="page-link" href="#">Next</a>
                           </li>
                         </ul>
-                      </nav>
+                      </nav> -->
                       <!--Table-->
                     </div>
                   </div>
@@ -255,6 +225,9 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../styles/gentelella/build/js/custom.min.js"></script>
+
+    <!--DataTables js-->
+    <script type="text/javascript" src="../scripts/DataTables/datatables.min.js"></script>
 
     <!--JS Propio-->
     <script type="text/javascript" src="../scripts/index.js"></script>
