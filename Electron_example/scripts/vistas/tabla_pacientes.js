@@ -21,7 +21,7 @@ function GetPacientes(){
             result[i].RSD_ID ,
             result[i].RSD_NAME + " " + result[i].RSD_LASTNAME ,
             result[i].RSD_AGE,
-            ((result[i].RSD_GENDER == 0) ? "Hombre" : "Mujer"),
+            ((result[i].RSD_GENDER == 0) ? "Mujer" : "Hombre"),
             result[i].RSD_DATE,
             "<td> <button id=\"editar_" + result[i].RSD_ID + "\" onclick=\"EditarPaciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i></button>" +
             "<button id=\"consultar_" + result[i].RSD_ID + "\" onclick=\"Consultar_paciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-file-text\"></i></button>" +
