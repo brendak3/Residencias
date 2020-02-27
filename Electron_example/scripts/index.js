@@ -126,63 +126,63 @@ function TablaPruebas(){
 
 
 /*Vista de Pacientes*/
-function TablaPacientes(){
-  innerRow = "";
-  //document.getElementById('trows').innerHTML = "";
-  //Limpia los nombres de las columnas
-  $('#trows').html('');
-
-  //Nombre de las columnas nuevas
-  innerRow = "<th>#</th>" +
-              "<th>Name</th>" +
-              "<th>Age</th>" +
-              "<th>Gender</th>" +
-              "<th>Date</th>" +
-              "<th>Options</th>";
-
-  //Muestra los
-  $('#trows').html(innerRow);
-
-  pool.getConnection()
-  .then(conn => {
-    conn.query("SELECT RSD_ID, RSD_NAME, RSD_LASTNAME, RSD_AGE, RSD_GENDER, DATE_FORMAT(RSD_DATE, \'%c/%e/%Y %h:%i:%s %p\') as RSD_DATE FROM RESIDENCIA.rs_datospersona")
-    .then((rows) => {
-      //console.log(rows);
-      json = JSON.stringify(rows);
-      //console.log(json);
-
-      result = rows;
-      $('#tbody').html('');
-      for (var i = 0; i < result.length; i++) {
-        innerBody = "";
-
-        innerBody = "<tr>" +
-                    "<td>" + result[i].RSD_ID + "</td>" +
-                    "<td>" + result[i].RSD_NAME + " " + result[i].RSD_LASTNAME + "</td>" +
-                    "<td>" + result[i].RSD_AGE + "</td>" +
-                    "<td>" + result[i].RSD_GENDER + "</td>" +
-                    "<td>" + result[i].RSD_DATE + "</td>" +
-                    "<td> <button id=\"editar_" + result[i].RSD_ID + "\" onclick=\"EditarPaciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i></button>" +
-                    "<button id=\"consultar_" + result[i].RSD_ID + "\" onclick=\"Consultar_paciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-file-text\"></i></button>" +
-                    "<button id=\"eliminar_" + result[i].RSD_ID + "\" onclick=\"Eliminar_paciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-trash\"></i></button>" +
-                    "</td>" +
-                    "</tr>";
-
-        $('#tbody').append(innerBody);
-      }
-    })
-    .then((res) => {
-      //console.log(res);
-      conn.end();
-    })
-    .catch(err => {
-      console.log(err);
-      conn.end();
-    })
-  }).catch(err =>{
-    console.log(err);
-  });
-}
+// function TablaPacientes(){
+//   innerRow = "";
+//   //document.getElementById('trows').innerHTML = "";
+//   //Limpia los nombres de las columnas
+//   $('#trows').html('');
+//
+//   //Nombre de las columnas nuevas
+//   innerRow = "<th>#</th>" +
+//               "<th>Name</th>" +
+//               "<th>Age</th>" +
+//               "<th>Gender</th>" +
+//               "<th>Date</th>" +
+//               "<th>Options</th>";
+//
+//   //Muestra los
+//   $('#trows').html(innerRow);
+//
+//   pool.getConnection()
+//   .then(conn => {
+//     conn.query("SELECT RSD_ID, RSD_NAME, RSD_LASTNAME, RSD_AGE, RSD_GENDER, DATE_FORMAT(RSD_DATE, \'%c/%e/%Y %h:%i:%s %p\') as RSD_DATE FROM RESIDENCIA.rs_datospersona")
+//     .then((rows) => {
+//       //console.log(rows);
+//       json = JSON.stringify(rows);
+//       //console.log(json);
+//
+//       result = rows;
+//       $('#tbody').html('');
+//       for (var i = 0; i < result.length; i++) {
+//         innerBody = "";
+//
+//         innerBody = "<tr>" +
+//                     "<td>" + result[i].RSD_ID + "</td>" +
+//                     "<td>" + result[i].RSD_NAME + " " + result[i].RSD_LASTNAME + "</td>" +
+//                     "<td>" + result[i].RSD_AGE + "</td>" +
+//                     "<td>" + result[i].RSD_GENDER + "</td>" +
+//                     "<td>" + result[i].RSD_DATE + "</td>" +
+//                     "<td> <button id=\"editar_" + result[i].RSD_ID + "\" onclick=\"EditarPaciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i></button>" +
+//                     "<button id=\"consultar_" + result[i].RSD_ID + "\" onclick=\"Consultar_paciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-file-text\"></i></button>" +
+//                     "<button id=\"eliminar_" + result[i].RSD_ID + "\" onclick=\"Eliminar_paciente(this.value)\" value=\""+ result[i].RSD_ID + "\" type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-trash\"></i></button>" +
+//                     "</td>" +
+//                     "</tr>";
+//
+//         $('#tbody').append(innerBody);
+//       }
+//     })
+//     .then((res) => {
+//       //console.log(res);
+//       conn.end();
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       conn.end();
+//     })
+//   }).catch(err =>{
+//     console.log(err);
+//   });
+// }
 
 /*CRUD Paciente*/
 function EditarPaciente(id){
@@ -299,7 +299,7 @@ function Consultar_paciente(id){
   pool.getConnection()
     .then(conn => {
 
-      conn.query("SELECT * FROM RESIDENCIA.rs_datospersona WHERE RSD_ID= " + id)
+      conn.query("SELECT RSD_NAME, RSD_LASTNAME, RSD_AGE, RSD_EMAIL, RSD_OCCUPATION, RSD_GENDER, DATE_FORMAT(RSD_DATE, '%Y-%m-%d') as RSD_DATE FROM RESIDENCIA.rs_datospersona WHERE RSD_ID = " + id)
         .then((rows) => {
           console.log(rows); //[ {val: 1}, meta: ... ]
           //Table must have been created before
@@ -310,12 +310,19 @@ function Consultar_paciente(id){
           $('#id_paciente').val(id);
 
           $('#name').val(rows[0].RSD_NAME);
+          $('#name').attr('readonly', 'readonly');
           $('#lastname').val(rows[0].RSD_LASTNAME);
+          $('#lastname').attr('readonly', 'readonly');
           $('#age').val(rows[0].RSD_AGE);
+          $('#age').attr('readonly', 'readonly');
           $('#email').val(rows[0].RSD_EMAIL);
+          $('#email').attr('readonly', 'readonly');
           $('#occupation').val(rows[0].RSD_OCCUPATION);
+          $('#occupation').attr('readonly', 'readonly');
           $('#inputBirthdate').val(rows[0].RSD_DATE);
+          $('#inputBirthdate').attr('readonly', 'readonly');
           $('#inputState').val(rows[0].RSD_GENDER);
+          $('#inputState').attr('readonly', 'readonly');
         })
         .then((res) => {
           console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }

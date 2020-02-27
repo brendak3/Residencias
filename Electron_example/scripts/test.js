@@ -26,7 +26,7 @@ $(document).ready(function(){
     var selected_port = $("#board_com option:selected").val();
     if (selected_port != "simulate") {
       portName = selected_port;
-      simulate = false;
+      simulated = false;
     }
     //VideoWindow();
   });
@@ -165,6 +165,7 @@ function ListPorts(){
   serialport.list((err, ports) => {
     if (ports.length === 0) {
       //console.log("No ports discovered");
+      $("#board_com").append(new Option("OBCSimulatorPortName", "simulate"));
       $("#board_com").append(new Option("No ports discovered", 0));
     }
     else if (err) {
@@ -172,7 +173,7 @@ function ListPorts(){
     } else {
       //console.log('ports', ports);
       //console.log(ports[0].comName);
-      $("#board_com").append(new Option("OBCSimulatorPortName", "simulate"))
+      $("#board_com").append(new Option("OBCSimulatorPortName", "simulate"));
       for (var i = 0; i < ports.length; i++) {
         $("#board_com").append(new Option(ports[i].comName, ports[i].comName));
       }
@@ -184,7 +185,7 @@ function ListPorts(){
 function StartTest(){
   //Abrir el puerto para openbci
   ourBoard = new Cyton({
-    simulate: simulate
+    simulate: simulated
   });
 
   //Simulo que leo del puerto
