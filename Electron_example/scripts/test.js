@@ -81,7 +81,7 @@ const pool = mariadb.createPool({
 
 //Variables
 /***********Grafica*************/
-var signal_one = 0, signal_two = 0;
+var signal_one = 0, signal_two = 0, signal_three = 0, signal_four = 0, signal_five = 0, signal_six = 0, signal_seven = 0, signal_eight = 0;
 var chart;
 var isIE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.userAgent.indexOf('Trident') !== -1;
 var chartColors = {
@@ -107,6 +107,54 @@ var config = {
       data: []
     }, {
       label: 'Signal 2',
+      backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
+      borderColor: chartColors.blue,
+      fill: false,
+      lineTension: 0,
+      cubicInterpolationMode: 'monotone',
+      data: []
+    },{
+      label: 'Signal 3',
+      backgroundColor: color(chartColors.orange).alpha(0.5).rgbString(),
+      borderColor: chartColors.blue,
+      fill: false,
+      lineTension: 0,
+      cubicInterpolationMode: 'monotone',
+      data: []
+    },{
+      label: 'Signal 4',
+      backgroundColor: color(chartColors.yellow).alpha(0.5).rgbString(),
+      borderColor: chartColors.blue,
+      fill: false,
+      lineTension: 0,
+      cubicInterpolationMode: 'monotone',
+      data: []
+    },{
+      label: 'Signal 5',
+      backgroundColor: color(chartColors.green).alpha(0.5).rgbString(),
+      borderColor: chartColors.blue,
+      fill: false,
+      lineTension: 0,
+      cubicInterpolationMode: 'monotone',
+      data: []
+    },{
+      label: 'Signal 6',
+      backgroundColor: color(chartColors.white).alpha(0.5).rgbString(),
+      borderColor: chartColors.blue,
+      fill: false,
+      lineTension: 0,
+      cubicInterpolationMode: 'monotone',
+      data: []
+    },{
+      label: 'Signal 7',
+      backgroundColor: color(chartColors.dark).alpha(0.5).rgbString(),
+      borderColor: chartColors.blue,
+      fill: false,
+      lineTension: 0,
+      cubicInterpolationMode: 'monotone',
+      data: []
+    },{
+      label: 'Signal 8',
       backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
       borderColor: chartColors.blue,
       fill: false,
@@ -214,6 +262,12 @@ function StartTest(){
             //myChart.update();
             signal_one = sample.channelData[0];
             signal_two = sample.channelData[1];
+            signal_three = sample.channelData[2];
+            signal_four = sample.channelData[3];
+            signal_five = sample.channelData[4];
+            signal_six = sample.channelData[5];
+            signal_seven = sample.channelData[6];
+            signal_eight = sample.channelData[7];
             // signal_one = (sample.channelData[0] * 1000000);
             // signal_two = (sample.channelData[1] * 1000000);
             //console.log(sample.channelData[0]);
@@ -228,37 +282,6 @@ function StartTest(){
 //Detiene el DataStream
 function StopTest(){
   ourBoard.streamStop().then(ourBoard.disconnect());
-}
-
-/*LEGACY PINTA LA GRAFICA*/
-function ChartJQ() {
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: ['Read'],
-          datasets: [{
-              label: 'E.E.G. Read',
-              data: [],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-          }
-      }
-  });
 }
 
 //TESTER GRAFICA DataSet
@@ -319,6 +342,30 @@ function onRefresh(chart){
     y: signal_two
   });
 
+  chart.config.data.datasets[2].data.push({
+    x: Date.now(),
+    y: signal_three
+  });
+  chart.config.data.datasets[3].data.push({
+    x: Date.now(),
+    y: signal_four
+  });
+  chart.config.data.datasets[4].data.push({
+    x: Date.now(),
+    y: signal_five
+  });
+  chart.config.data.datasets[5].data.push({
+    x: Date.now(),
+    y: signal_six
+  });
+  chart.config.data.datasets[6].data.push({
+    x: Date.now(),
+    y: signal_seven
+  });
+  chart.config.data.datasets[7].data.push({
+    x: Date.now(),
+    y: signal_eight
+  });
   // chart.config.data.datasets.forEach(function(dataset) {
 	// 	dataset.data.push({
 	// 		x: Date.now(),
