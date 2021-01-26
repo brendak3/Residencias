@@ -21,7 +21,7 @@ function SaveUser(){
   pool.getConnection()
     .then(conn =>
       conn.query("INSERT INTO RS_DATOSPERSONA (RSD_NAME, RSD_LASTNAME, RSD_EMAIL, RSD_GENDER) " +
-      "VALUES(" + $('#name').val() + ", " + $('#lastname').val() + ", " + $('#email').val() + ", " + $('#name').val() + ")")
+      "VALUES(" + $('#name').val() + ", " + $('#lastname').val() + ", " + $('#email').val() + ", " + $('#password').val() + ")")
         .then((rows) => {
           conn.end();
           return rows;
