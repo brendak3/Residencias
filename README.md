@@ -3,6 +3,7 @@ Proyecto Agosto-Diciembre 2019
 
 # Instalación Windows
 Descargamos e instalamos NodeJS de su página oficial: https://nodejs.org/es/
+(La version utilizada de node fue 10.16.2)
 
 Clonamos el repositorio ya sea con un cliente visual de git o con comandos en terminal.
 Una vez que se tenga clonado, nos colocamos en la ruta del proyecto y abrimos una consola (ya sea power shell o consola normal) e ingresamos el comando:
