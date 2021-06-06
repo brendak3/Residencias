@@ -19,18 +19,11 @@ function createWindow () {
     title: 'E.E.G. DataSet ITT Index',
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    show:true
   })
 
-  // child = new BrowserWindow({ parent: win, modal: true, show: false })
 
-  // and load the index.html of the app.
-  //win.loadFile('views/index.html')
-  // child.loadURL(url.format({
-  //   pathname: path.join(__dirname, 'views/index.html'),
-  //   protocol: 'file',
-  //   slashes: true
-  // }))
   //Maximizar la pantalla
 
   /*Load the html for the view*/
@@ -40,10 +33,6 @@ function createWindow () {
     slashes: true
   }))
 
-  // child.once('ready-to-show', () => {
-  //   child.show()
-  // })
-
   // Open the DevTools.
   win.webContents.openDevTools()
 
@@ -51,23 +40,7 @@ function createWindow () {
   const mainMenu = Menu.buildFromTemplate(templateMenu);
   Menu.setApplicationMenu(mainMenu);
 
-  /*Agrego un listener a la combinacion CMD+Q si se trata de macos*/
-  // if (process.platform === 'darwin') {
-  //   globalShortcut.register('Command+Q', () => {
-  //     app.quit();
-  //   })
-  // }
 
-  // Emitted when the window is closed.
-  // child.on('closed', () => {
-  //   // Dereference the window object, usually you would store windows
-  //   // in an array if your app supports multi windows, this is the time
-  //   // when you should delete the corresponding element.
-  //   win = null
-  //
-  //   /*El del video*/
-  //   //app.quit();
-  // })
 
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -77,8 +50,30 @@ function createWindow () {
 
     /*El del video*/
     //app.quit();
-  })
+  });
+
+
+  /*Login window*/
+  child = new BrowserWindow({
+    parent:win,
+    width:600,
+    height:500,
+    frame:false,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+
+  child.loadURL(url.format({
+    pathname:path.join(__dirname, 'views/login.html'),
+    protocol:'file',
+    slashes:true
+  }));
+
+  child.webContents.openDevTools()
 }
+
+
 
 
 /*El arreglo con las opciones*/
@@ -150,6 +145,20 @@ app.on('activate', () => {
   }
 })
 
+//Event Listeners
+ipcMain.on('login-close', (event, arg) => {
+    // Request to update the label in the renderer process of the second window
+    app.quit();
+    console.log('Entro y se cerro');
+})
+
+ipcMain.on('create-session-cookie', (event, arg) => {
+    // Close child window
+    child.close();
+    // Create cookie
+    
+})
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
@@ -186,7 +195,7 @@ function createNewWindow(){
   ipcMain.on('request-update-label-in-second-window', (event, arg) => {
       // Request to update the label in the renderer process of the second window
       videoWindow.webContents.send('action-update-label', arg);
-  });
+  })
 
 
   /*For closing the emergent window*/

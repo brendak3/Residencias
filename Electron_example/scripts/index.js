@@ -29,28 +29,29 @@ $(document).ready(function(){
   });
 
 
+  //Cambio de contenido en la vista principal
   $('#altausuario').click(function(){
-    // $('#page').attr('src', '../views/altausuario.html');
-    //Llena la tabla de usuarios para mostarla al usuarios
-    // $('#title').html("Patients <small>List of patients.</small>");
-    // $('#alta_usuario').show();
     // TablaPacientes();
     $('#containerHTML').load('../views/tabla_pacientes.html');
   });
 
   /*Tabla de usuarios*/
   $('#tablapruebas').click(function(){
-    //$('#page').attr('src', '../views/tablapruebas.html');
-    // $('#title').html("Historial of Tests <small>List of the lates patient tests.</small>");
-    // $('#alta_usuario').hide();
     // TablaPruebas();
     $('#containerHTML').load('../views/tabla_pruebas.html');
   });
 
-  /*Tabla de datos*/
-  $('#grafica').click(function(){
-    $('#page').attr('src', '../views/test.html');
+  /*Vista para pruebas*/
+  $('#patientTest').click(function(){
+    $('#containerHTML').load('../views/patientTest.html');
+    $('#javascriptContent').load('../views/patientTestjs.html');
   });
+
+
+  /*Tabla de datos*/ //Al parecer no uso esto.
+  // $('#grafica').click(function(){
+  //   $('#page').attr('src', '../views/test.html');
+  // });
 
   $('#containerHTML').load('../views/tabla_pruebas.html');
 });

@@ -9,10 +9,12 @@ $(document).ready(function(){
   $('#stop').click(function(){
     StopTest();
   });
+
   //Consulto todos los pacientes para rellenar el select
   Pacientes();
   Emotions();
   ListPorts();
+
   Videos($('#emotion_select option:selected').val());
   //Cuando el boton de Ok del modal sea pulsado
   $('#start_test').click(function(){
@@ -46,6 +48,7 @@ $(document).ready(function(){
   //Inicializo Cyton para su uso
   const ourBoard = new Cyton();
 });
+
 //Variables de configuracion
 //Para caputra de las señales de la placa
 var portName = constants.OBCISimulatorPortName;
@@ -62,8 +65,6 @@ const remote = require('electron').remote;
 //const { ipcMain } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
-//requerido para graficas de highcharts
-var Highcharts = require('highcharts');
 
 //Libreria para el puerto serial
 const serialport = require('serialport')
@@ -453,46 +454,3 @@ function Videos(emotion){
       //not connected
     });
 }
-
-
-// function VideoWindow(){
-//   //Save the window into a variable
-//   var window = remote.getCurrentWindow();
-//   //Create the window for displaying the video
-//   let child = new BrowserWindow({
-//     parent: window,
-//     width: 800,
-//     height: 600,
-//     webPreferences: {
-//       nodeIntegration: true
-//     },
-//   })
-//   child.loadURL(url.format({
-//     pathname: path.join(__dirname, '/videoplaying.html'),
-//     protocol: 'file',
-//     slashes: true
-//   }))
-//
-//   child.webContents.openDevTools();
-//
-//   child.once('ready-to-show', () => {
-//     child.show()
-//   })
-//
-//   // Attach event listener to event that requests to update something in the second window
-//   // from the first window
-//   //ipcMain.on('request-update-label-in-second-window', (event, arg) => {
-//       // Request to update the label in the renderer process of the second window
-//     //  secondWindow.webContents.send('action-update-label', arg);
-//   //});
-//
-//   child.on('closed', () => {
-//     // Dereference the window object, usually you would store windows
-//     // in an array if your app supports multi windows, this is the time
-//     // when you should delete the corresponding element.
-//     win = null
-//
-//     /*El del video*/
-//     //app.quit();
-//   })
-// }
