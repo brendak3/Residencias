@@ -63,3 +63,5 @@ CREATE TABLE IF NOT EXISTS rs_prueba (
   CONSTRAINT FK_USER_ID FOREIGN KEY (RPS_USER_ID) REFERENCES rs_user (RS_ID)
 );
 
+INSERT INTO rs_user(RS_USERNAME, RS_NAME, RS_LASNAME, RS_ISADMIN, RS_PASSWORD, RS_EMAIL)
+VALUES ('admin', 'Administrator', 'User', 1, 'password', 'adminuser@email.com');
