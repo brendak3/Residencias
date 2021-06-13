@@ -1,8 +1,9 @@
 /*Require from Electron.js*/
-const { app, BrowserWindow, Menu, globalShortcut, ipcMain } = require('electron')
+const { app, BrowserWindow, Menu, globalShortcut, ipcMain, session } = require('electron')
 /*Requires from Node.js*/
 const url = require('url');
 const path = require('path');
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -152,11 +153,15 @@ ipcMain.on('login-close', (event, arg) => {
     console.log('Entro y se cerro');
 })
 
-ipcMain.on('create-session-cookie', (event, arg) => {
+ipcMain.on('create-session-cookie', (event, args) => {
     // Close child window
     child.close();
+
     // Create cookie
-    
+    var ses = session.fromPartition('persist:name');
+    var json = JSON.parse(args);
+
+    win.webContents.send("cookie-creation", args)
 })
 
 // In this file you can include the rest of your app's specific main process

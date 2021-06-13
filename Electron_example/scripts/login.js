@@ -28,11 +28,11 @@ async function TryLogin() {
   let conn;
   try {
 	conn = await pool.getConnection();
-	const rows = await conn.query("SELECT rs_username, RS_ISADMIN  FROM rs_user WHERE rs_email = '" + $('#email').val() + "' AND rs_password = '" + $('#password').val() + "'");
+	const rows = await conn.query("SELECT rs_username, RS_ISADMIN FROM rs_user WHERE rs_email = '" + $('#email').val() + "' AND rs_password = '" + $('#password').val() + "'");
 	console.log(rows); //[ {val: 1}, meta: ... ]
-
+  var cookieValue = JSON.stringify({username: rows[0].rs_username, isadmin: rows[0].RS_ISADMIN[0]});
   // Validate user credentials
-  ipcRenderer.send('create-session-cookie', '');create-session-cookie
+  ipcRenderer.send('create-session-cookie', cookieValue);//create-session-cookie
 
   } catch (err) {
 	   throw err;

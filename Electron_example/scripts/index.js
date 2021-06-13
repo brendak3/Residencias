@@ -68,6 +68,49 @@ const url = require('url');
 const path = require('path');
 const remote = require('electron').remote;
 const BrowserWindow = remote.BrowserWindow;
+var session = require("electron").remote.session;
+var ses = session.fromPartition("persist:name");
+
+/*Comunicacion con el proceso Main*/
+const { ipcRenderer  } = require('electron');
+var userName;
+var isAdmin
+
+/*Obtener la informacion para la cookie del usuario*/
+ipcRenderer.on("cookie-creation", (event, args) => {
+  //document.cookie = "session=" + JSON.stringify(args);
+  setCookie(args, "myCookie")
+  getCookie("myCookie")
+});
+
+
+function setCookie(data, name) {
+  var expiration = new Date();
+  var hour = expiration.getHours();
+  hour = hour + 24;
+  expiration.setHours(hour);
+  ses.cookies.set({
+    url: "https://myapp.com", //the url of the cookie.
+    name: name, // a name to identify it.
+    value: data, // the value that you want to save
+    expirationDate: expiration.getTime()
+}, function(error) {
+    console.log(error);
+  });
+}
+
+function getCookie(name) {
+  var cookieValue;
+  var value = {
+    name: name // the request must have this format to search the cookie.
+  };
+  ses.cookies.get(value, function(error, cookies) {
+    console.log(cookies[0].value); // the value saved on the cookie
+    cookieValue = cookies[0].value;
+  });
+
+  return cookieValue;
+}
 
 //Abrir uina ventana como modal
 function ModalLogin(){
@@ -262,10 +305,12 @@ function UpdatePaciente(){
 }
 
 function InsertPaciente(){
+  var cookie = getCookie("myCookie");
+
   pool.getConnection()
     .then(conn => {
 
-      conn.query("INSERT INTO RESIDENCIA.rs_datospersona (RSD_NAME, RSD_LASTNAME, RSD_AGE, RSD_EMAIL, RSD_OCCUPATION, RSD_GENDER, RSD_DATE) " +
+      conn.query("INSERT INTO RESIDENCIA.rs_datospersona (RSD_NAME, RSD_LASTNAME, RSD_AGE, RSD_EMAIL, RSD_OCCUPATION, RSD_GENDER, RSD_DATE, RSD_USERID) " +
                 "VALUES ('"+ $('#name').val() + "', '" + $('#lastname').val() + "', "+ $('#age').val() + ", '" + $('#email').val() + "', '" + $('#occupation').val() + "', '" + $('#inputState option:selected').val() + "' , '" + $('#inputBirthdate').val() + "')")
         .then((rows) => {
           console.log(rows); //[ {val: 1}, meta: ... ]
