@@ -63,5 +63,18 @@ CREATE TABLE IF NOT EXISTS rs_prueba (
   CONSTRAINT FK_USER_ID FOREIGN KEY (RPS_USER_ID) REFERENCES rs_user (RS_ID)
 );
 
+/*Insert admin user to the rs_user table*/
 INSERT INTO rs_user(RS_USERNAME, RS_NAME, RS_LASNAME, RS_ISADMIN, RS_PASSWORD, RS_EMAIL)
 VALUES ('admin', 'Administrator', 'User', 1, 'password', 'adminuser@email.com');
+
+
+/*Insert records to the rs_catalog_video*/
+INSERT INTO rs_catalog_video(RSC_ARTISTA, RSC_CANCION, RSC_ENLACE, RSC_EMOCION, RSC_DURACION)
+VALUES
+('Emilíana Torrini', 'Jungle Drum', 'https://www.youtube.com/embed/iZ9vkd7Rp-g', 'fun', 139),
+('Jackson 5','Blame It On The Boogie','https://www.youtube.com/embed/nqxVMLVe62U','joy', 192),
+('Lustra','Scotty Doesnt Know','https://www.youtube.com/embed/lcEkS9tcIjg','exciting', 175),
+('Michael Franti & Spearhead','Say Hey (I Love You)','https://www.youtube.com/embed/A0fYKguHFcQ','happy', 231),
+('A Fine Frenzy','Goodbye My Almost Lover','https://www.youtube.com/embed/I_S_TbD1XFM','depressing', 247),
+('The Submarines','Darkest Things','https://www.youtube.com/embed/zCXDpWP7KMM','sentimental', 310),
+('Porcupine Tree','Normal','https://www.youtube.com/embed/kcpUO8K_rek','sentimental',426);

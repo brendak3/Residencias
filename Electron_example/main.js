@@ -36,13 +36,16 @@ function createWindow () {
 
   // Open the DevTools.
   win.webContents.openDevTools()
-
+  
+  //Hide the main window
+  win.hide();
+  
   /*Navigation menu for the main window*/
   const mainMenu = Menu.buildFromTemplate(templateMenu);
   Menu.setApplicationMenu(mainMenu);
 
 
-
+ 
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
@@ -160,7 +163,7 @@ ipcMain.on('create-session-cookie', (event, args) => {
     // Create cookie
     var ses = session.fromPartition('persist:name');
     var json = JSON.parse(args);
-
+    win.show();
     win.webContents.send("cookie-creation", args)
 })
 
@@ -220,7 +223,7 @@ function AltaWindow(){
     height: 600,
     title: 'Alta Usuario',
     webPreferences: {
-      nodeIntegration: false
+      nodeIntegration: true
     }
   });
   /*Quitar el menu*/

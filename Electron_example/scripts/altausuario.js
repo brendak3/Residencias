@@ -13,7 +13,7 @@ const pool = mariadb.createPool({
      database: 'residencia',
      host: '127.0.0.1',
      user:'root',
-     password: '',
+     password: 'mariposa64',
      connectionLimit: 5
 });
 

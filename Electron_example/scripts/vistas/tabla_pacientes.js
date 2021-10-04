@@ -1,8 +1,36 @@
 $(document).ready(function(){
   $("#title").text("Pacientes");
-  $("#myTable").DataTable();
+  table = $("#myTable").DataTable();
   GetPacientes();
+
+    //Boton para dar de alta un nuevo paciente
+    $('#alta_usuario').click(function () {
+      $('#changes').hide();
+      $('#save').show();
+  
+      //Limpio el Formulario
+      $('#id_paciente').val();
+      $('#name').val('');
+      $('#lastname').val('');
+      $('#age').val('');
+      $('#email').val('');
+      $('#occupation').val('');
+      $('#inputBirthdate').val('');
+      $('#inputState select').val('');
+
+      
+      $('#name').removeAttr('readonly');
+      $('#lastname').removeAttr('readonly');
+      $('#age').removeAttr('readonly');
+      $('#email').removeAttr('readonly');
+      $('#occupation').removeAttr('readonly');
+      $('#inputBirthdate').removeAttr('readonly');
+      $('#inputState').removeAttr('readonly');
+
+    });
 });
+
+var table;
 
 function GetPacientes(){
   pool.getConnection()
@@ -12,7 +40,7 @@ function GetPacientes(){
       //console.log(rows);
       json = JSON.stringify(rows);
       //console.log(json);
-
+      table.clear().draw();
       result = rows;
       // $('#tbody').html('');
       for (var i = 0; i < result.length; i++) {
@@ -49,10 +77,10 @@ function GetPacientes(){
       conn.end();
     })
     .catch(err => {
-      console.log(err);
+      alert.log(err);
       conn.end();
     })
   }).catch(err =>{
-    console.log(err);
+    alert.log(err);
   });
 }

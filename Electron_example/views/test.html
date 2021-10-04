@@ -1,43 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Test Data</title>
-    <!--Bootstrap-->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
-  </head>
-  <body>
-    <div class="container">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test Data</title>
+  <!--Bootstrap-->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+
+<body style="background-color:#F7F7F7;">
+
+  <div class="container">
+    <!-- <div class="jumbotron" style="background-color: #FFF;"> -->
       <div class="row">
-        <div class="col-md-12 col-xs-12">
-          <h1>DataSet</h1>
+        <div class="col-md-12 col-xs-12 pt-5">
+          <h5>DataSet</h5>
+          <hr>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6 col-xs-6">
-          <label for="patient_name">Patient:</label>
-          <input id="patient_name" class="form-control" type="text" readonly="readonly" value="" />
+          <label for="patient">Select Patient:</label>
+          <select class="form-control" id="patient">
+          </select>
+          <!-- <label for="patient_name">Patient:</label> -->
+          <!-- <input id="patient_name" class="form-control" type="text" readonly="readonly" value="" /> -->
         </div>
         <div class="col-md-6 col-xs-6">
+          <label for="emotion_select">Select Expected Emotion:</label>
+          <select class="form-control" id="emotion_select">
+          </select>
           <!-- <label for="patient_lastname">Lastname:</label>
           <input id="patient_lastname" class="form-control" type="text" readonly="readonly" value="" /> -->
         </div>
       </div>
       <div class="row">
         <div class="col-md-4 col-xs-4">
-          <label for="video_name">Video:</label>
-          <input id="video_name" class="form-control" type="text" readonly="readonly" value="" />
+          <!-- <label for="video_name">Video:</label>
+          <input id="video_name" class="form-control" type="text" readonly="readonly" value="" /> -->
+          <label for="video">Select Video:</label>
+          <select class="form-control" id="video">
+
+          </select>
         </div>
         <div class="col-md-4 col-xs-4">
           <label for="video_duration">Duration:</label>
           <input id="video_duration" class="form-control" type="text" readonly="readonly" value="" />
         </div>
         <div class="col-md-4 col-xs-4">
-          <label for="emotion">Expected Emotion:</label>
-          <input id="emotion" class="form-control" type="text" readonly="readonly" value="" />
+          <label for="video">Select Board:</label>
+          <select class="form-control" id="board_com">
+
+          </select>
         </div>
       </div>
-      <br/>
+      <br />
       <!--Grafica-->
       <div class="row">
         <!--Grafica-->
@@ -62,9 +79,10 @@
           </div>
           <div class="row">
             <div class="col-md-12 col-xs-12">
-            		<span class="label">duration:</span>
-            		<span id="durationValue" class="value">20000</span>
-            		<span><input type="range" min="1000" max="60000" step="100" value="20000" id="duration" class="control"></span>
+              <span class="label">duration:</span>
+              <span id="durationValue" class="value">20000</span>
+              <span><input type="range" min="1000" max="60000" step="100" value="20000" id="duration"
+                  class="control"></span>
             </div>
           </div>
           <div class="row">
@@ -106,90 +124,93 @@
       </div>
       <!--Grafica-->
       <!-- Modal -->
-      <div id="setup_test" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Setting Up Test</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-12 col-xs-12">
-                    <label for="patient">Select Patient:</label>
-                    <select class="form-control" id="patient">
+      <!-- <div id="setup_test" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+      tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Setting Up Test</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                  <label for="patient">Select Patient:</label>
+                  <select class="form-control" id="patient">
 
-                    </select>
-                  </div>
+                  </select>
                 </div>
-                <div class="row">
-                  <div class="col-md-6 col-xs-6">
-                    <label for="emotion_select">Select Expected Emotion:</label>
-                    <select class="form-control" id="emotion_select">
-                    </select>
-                  </div>
-                  <div class="col-md-6 col-xs-6">
-                    <label for="video">Select Video:</label>
-                    <select class="form-control" id="video">
-
-                    </select>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-6">
+                  <label for="emotion_select">Select Expected Emotion:</label>
+                  <select class="form-control" id="emotion_select">
+                  </select>
                 </div>
-                <div class="row">
-                  <div class="col-md-6 col-xs-6">
-                    <label for="board_com">Select Board: </label>
-                    <select multiple class="form-control" id="board_com">
+                <div class="col-md-6 col-xs-6">
+                  <label for="video">Select Video:</label>
+                  <select class="form-control" id="video">
 
-                    </select>
-                  </div>
-                  <div class="col-md-6 col-xs-6">
-                    <br/>
-                    <button id="refresh" type="button" class="btn btn-primary">Refresh</button>
-                  </div>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-6">
+                  <label for="board_com">Select Board: </label>
+                  <select multiple class="form-control" id="board_com">
+
+                  </select>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                  <br />
+                  <button id="refresh" type="button" class="btn btn-primary">Refresh</button>
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
-              <button id="close_test" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button id="start_test" type="button" class="btn btn-primary">Ok</button>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="close_test" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="start_test" type="button" class="btn btn-primary">Ok</button>
           </div>
         </div>
       </div>
+      </div> -->
       <!--Modal-->
-    </div>
+    <!-- </div> -->
+  </div>
 
-    <!--Importamos el script-->
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <!--Importamos el script-->
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
 
-    <script type="text/javascript" src="../scripts/datastream/moment.js"></script>
-    <script src="../scripts/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../scripts/openbci.js"></script>
-    <script type="text/javascript" src="../scripts/test.js"></script>
+  <script type="text/javascript" src="../scripts/datastream/moment.js"></script>
+  <script src="../scripts/jquery-3.4.1.js"></script>
+  <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../scripts/openbci.js"></script>
+  <script type="text/javascript" src="../scripts/test.js"></script>
 
-    <!--Plugin de ChartJs-->
-    <script type="text/javascript" src="../scripts/datastream/chartjs-plugin-streaming.js"></script>
+  <!--Plugin de ChartJs-->
+  <script type="text/javascript" src="../scripts/datastream/chartjs-plugin-streaming.js"></script>
 
-    <script>
-       const { ipcRenderer } = require('electron');
+  <script>
+    const { ipcRenderer } = require('electron');
 
-       document.getElementById("btn").addEventListener("click", () => {
-           // Some data that will be sent to the main process
-           var videoUrl = $('#video option:selected').val();
-           let Data = {
-               message: videoUrl,
-           };
+    document.getElementById("btn").addEventListener("click", () => {
+      // Some data that will be sent to the main process
+      var videoUrl = $('#video option:selected').val();
+      let Data = {
+        message: videoUrl,
+      };
 
-           // Trigger the event listener action to this event in the renderer process and send the data
-           ipcRenderer.send('request-update-label-in-second-window', Data);
-       }, false);
-   </script>
+      // Trigger the event listener action to this event in the renderer process and send the data
+      ipcRenderer.send('request-update-label-in-second-window', Data);
+    }, false);
+  </script>
 
-    <script>if (window.module) module = window.module;</script>
-  </body>
+  <script>if (window.module) module = window.module;</script>
+</body>
+
 </html>

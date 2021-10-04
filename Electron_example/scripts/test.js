@@ -1,14 +1,15 @@
-$(document).ready(function(){
-  $('#setup_test').modal('toggle');
+$(document).ready(function () {
+  //$('#setup_test').modal('toggle');
 
   //TEST canvas Grafica
-  $('#start').click(function(){
+  $('#start').click(function () {
     DataSet();
   });
 
-  $('#stop').click(function(){
+  $('#stop').click(function () {
     StopTest();
   });
+
 
   //Consulto todos los pacientes para rellenar el select
   Pacientes();
@@ -17,7 +18,7 @@ $(document).ready(function(){
 
   Videos($('#emotion_select option:selected').val());
   //Cuando el boton de Ok del modal sea pulsado
-  $('#start_test').click(function(){
+  $('#start_test').click(function () {
     $('#patient_name').val($('#patient option:selected').text());
     $('#video_name').val($('#video option:selected').text());
     $('#video_duration').val('3:50 min');
@@ -35,13 +36,13 @@ $(document).ready(function(){
   });
 
   //Cuando una opcion es seleccionada
-  $('#emotion_select').change(function(){
+  $('#emotion_select').change(function () {
     $('#video').empty();
     Videos($('#emotion_select option:selected').val());
   });
 
   //Refrescar el multiselect
-  $('#refresh').click(function(){
+  $('#refresh').click(function () {
     $("#board_com").empty()
     ListPorts();
   });
@@ -74,11 +75,11 @@ const mariadb = require('mariadb');
 
 //Conexion a BD
 const pool = mariadb.createPool({
-     database: 'residencia',
-     host: '127.0.0.1',
-     user:'root',
-     password: '',
-     connectionLimit: 5
+  database: 'residencia',
+  host: '127.0.0.1',
+  user: 'root',
+  password: 'mariposa64',
+  connectionLimit: 5
 });
 
 //Variables
@@ -87,13 +88,13 @@ var signal_one = 0, signal_two = 0, signal_three = 0, signal_four = 0, signal_fi
 var chart;
 var isIE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.userAgent.indexOf('Trident') !== -1;
 var chartColors = {
-	red: 'rgb(255, 99, 132)',
-	orange: 'rgb(255, 159, 64)',
-	yellow: 'rgb(255, 205, 86)',
-	green: 'rgb(75, 192, 192)',
-	blue: 'rgb(54, 162, 235)',
-	purple: 'rgb(153, 102, 255)',
-	grey: 'rgb(201, 203, 207)'
+  red: 'rgb(255, 99, 132)',
+  orange: 'rgb(255, 159, 64)',
+  yellow: 'rgb(255, 205, 86)',
+  green: 'rgb(75, 192, 192)',
+  blue: 'rgb(54, 162, 235)',
+  purple: 'rgb(153, 102, 255)',
+  grey: 'rgb(201, 203, 207)'
 };
 var color = Chart.helpers.color;
 var config = {
@@ -105,7 +106,7 @@ var config = {
       borderColor: chartColors.red,
       fill: false,
       lineTension: 0,
-			borderDash: [8, 4],
+      borderDash: [8, 4],
       data: []
     }, {
       label: 'Signal 2',
@@ -115,7 +116,7 @@ var config = {
       lineTension: 0,
       cubicInterpolationMode: 'monotone',
       data: []
-    },{
+    }, {
       label: 'Signal 3',
       backgroundColor: color(chartColors.orange).alpha(0.5).rgbString(),
       borderColor: chartColors.blue,
@@ -123,7 +124,7 @@ var config = {
       lineTension: 0,
       cubicInterpolationMode: 'monotone',
       data: []
-    },{
+    }, {
       label: 'Signal 4',
       backgroundColor: color(chartColors.yellow).alpha(0.5).rgbString(),
       borderColor: chartColors.blue,
@@ -131,7 +132,7 @@ var config = {
       lineTension: 0,
       cubicInterpolationMode: 'monotone',
       data: []
-    },{
+    }, {
       label: 'Signal 5',
       backgroundColor: color(chartColors.green).alpha(0.5).rgbString(),
       borderColor: chartColors.blue,
@@ -139,7 +140,7 @@ var config = {
       lineTension: 0,
       cubicInterpolationMode: 'monotone',
       data: []
-    },{
+    }, {
       label: 'Signal 6',
       backgroundColor: color(chartColors.white).alpha(0.5).rgbString(),
       borderColor: chartColors.blue,
@@ -147,7 +148,7 @@ var config = {
       lineTension: 0,
       cubicInterpolationMode: 'monotone',
       data: []
-    },{
+    }, {
       label: 'Signal 7',
       backgroundColor: color(chartColors.dark).alpha(0.5).rgbString(),
       borderColor: chartColors.blue,
@@ -155,7 +156,7 @@ var config = {
       lineTension: 0,
       cubicInterpolationMode: 'monotone',
       data: []
-    },{
+    }, {
       label: 'Signal 8',
       backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
       borderColor: chartColors.blue,
@@ -167,7 +168,7 @@ var config = {
   },
 
   options: {
-    title:{
+    title: {
       display: true,
       text: 'Electroencephalogram Data Reading'
     },
@@ -183,7 +184,7 @@ var config = {
           onRefresh: onRefresh
         }
       }],
-      yAxes:[{
+      yAxes: [{
         type: 'linear',
         display: true,
         scaleLabel: {
@@ -192,16 +193,16 @@ var config = {
         }
       }]
     },
-    tooltips:{
+    tooltips: {
       mode: 'nearest',
       intersect: false
     },
-    hover:{
+    hover: {
       mode: 'nearest',
       intersect: false
     },
     plugins: {
-      streaming:{
+      streaming: {
         frameRate: 30
       }
     }
@@ -211,7 +212,7 @@ var config = {
 
 
 //Encontrar si hay puertos COM disponibles
-function ListPorts(){
+function ListPorts() {
   serialport.list((err, ports) => {
     if (ports.length === 0) {
       //console.log("No ports discovered");
@@ -232,7 +233,7 @@ function ListPorts(){
 }
 
 //Inica el DataStream
-function StartTest(){
+function StartTest() {
   //Abrir el puerto para openbci
   ourBoard = new Cyton({
     simulate: simulated
@@ -242,98 +243,98 @@ function StartTest(){
   //portName = constants.OBCISimulatorPortName;
 
   let counter = 0;
-  ourBoard.connect(portName).then(function (){
+  ourBoard.connect(portName).then(function () {
     console.log('Console');
     //ourBoard.on('ready', () =>{
-      ourBoard.streamStart();
-      ourBoard.on('sample', function(sample){ //Por el momento solo estamos trabajando con datos simulados que ofrece la librería de OpenBCI
-        //console.log('Iteration');
+    ourBoard.streamStart();
+    ourBoard.on('sample', function (sample) { //Por el momento solo estamos trabajando con datos simulados que ofrece la librería de OpenBCI
+      //console.log('Iteration');
+      //console.log(sample.channelData[0]);
+      for (var i = 0; i < 1; i++) {
+        //console.log("Chanel " + i + " " + sample.channelData[i]);
+        //myChart.data.labels.push(counter);
+
+        // myChart.data.datasets.forEach(dataset => {
+        //   dataset.data.push(sample.channelData[i]);
+        // });
+
+        //myChart.data.datasets[0].data.push(sample.channelData[0]);
+        //myChart.data.datasets[1].data.push(sample.channelData[1]);
+
+        //counter++;
+        //myChart.update();
+        signal_one = sample.channelData[0];
+        signal_two = sample.channelData[1];
+        signal_three = sample.channelData[2];
+        signal_four = sample.channelData[3];
+        signal_five = sample.channelData[4];
+        signal_six = sample.channelData[5];
+        signal_seven = sample.channelData[6];
+        signal_eight = sample.channelData[7];
+        // signal_one = (sample.channelData[0] * 1000000);
+        // signal_two = (sample.channelData[1] * 1000000);
         //console.log(sample.channelData[0]);
-          for (var i = 0; i < 1; i++) {
-            //console.log("Chanel " + i + " " + sample.channelData[i]);
-            //myChart.data.labels.push(counter);
-
-            // myChart.data.datasets.forEach(dataset => {
-            //   dataset.data.push(sample.channelData[i]);
-            // });
-
-            //myChart.data.datasets[0].data.push(sample.channelData[0]);
-            //myChart.data.datasets[1].data.push(sample.channelData[1]);
-
-            //counter++;
-            //myChart.update();
-            signal_one = sample.channelData[0];
-            signal_two = sample.channelData[1];
-            signal_three = sample.channelData[2];
-            signal_four = sample.channelData[3];
-            signal_five = sample.channelData[4];
-            signal_six = sample.channelData[5];
-            signal_seven = sample.channelData[6];
-            signal_eight = sample.channelData[7];
-            // signal_one = (sample.channelData[0] * 1000000);
-            // signal_two = (sample.channelData[1] * 1000000);
-            //console.log(sample.channelData[0]);
-          }
-      });
+      }
+    });
     //});
-  }).catch(function(err){
+  }).catch(function (err) {
     console.log("Error al conectar la placa: " + err);
   });
 }
 
 //Detiene el DataStream
-function StopTest(){
+function StopTest() {
   ourBoard.streamStop().then(ourBoard.disconnect());
 }
 
 //TESTER GRAFICA DataSet
-function DataSet(){
+function DataSet() {
   StartTest();
   var ctx = document.getElementById('myChart').getContext('2d');
   chart = new Chart(ctx, config);
   var colorNames = Object.keys(chartColors);
-  document.getElementById('duration').addEventListener(isIE ? 'change' : 'input', function() {
-  	config.options.scales.xAxes[0].realtime.duration = +this.value;
-  	chart.update({duration: 0});
-  	document.getElementById('durationValue').innerHTML = this.value;
+  document.getElementById('duration').addEventListener(isIE ? 'change' : 'input', function () {
+    config.options.scales.xAxes[0].realtime.duration = +this.value;
+    chart.update({ duration: 0 });
+    document.getElementById('durationValue').innerHTML = this.value;
   });
 
-  document.getElementById('ttl').addEventListener(isIE ? 'change' : 'input', function() {
-  	config.options.scales.xAxes[0].realtime.ttl = +this.value;
-  	chart.update({duration: 0});
-  	document.getElementById('ttlValue').innerHTML = this.value;
+  document.getElementById('ttl').addEventListener(isIE ? 'change' : 'input', function () {
+    config.options.scales.xAxes[0].realtime.ttl = +this.value;
+    chart.update({ duration: 0 });
+    document.getElementById('ttlValue').innerHTML = this.value;
   });
 
-  document.getElementById('refresh').addEventListener(isIE ? 'change' : 'input', function() {
-  	config.options.scales.xAxes[0].realtime.refresh = +this.value;
-  	chart.update({duration: 0});
-  	document.getElementById('refreshValue').innerHTML = this.value;
+  document.getElementById('refresh').addEventListener(isIE ? 'change' : 'input', function () {
+    config.options.scales.xAxes[0].realtime.refresh = +this.value;
+    chart.update({ duration: 0 });
+    document.getElementById('refreshValue').innerHTML = this.value;
   });
 
-  document.getElementById('delay').addEventListener(isIE ? 'change' : 'input', function() {
-  	config.options.scales.xAxes[0].realtime.delay = +this.value;
-  	chart.update({duration: 0});
-  	document.getElementById('delayValue').innerHTML = this.value;
+  document.getElementById('delay').addEventListener(isIE ? 'change' : 'input', function () {
+    config.options.scales.xAxes[0].realtime.delay = +this.value;
+    chart.update({ duration: 0 });
+    document.getElementById('delayValue').innerHTML = this.value;
   });
 
-  document.getElementById('frameRate').addEventListener(isIE ? 'change' : 'input', function() {
-  	config.options.plugins.streaming.frameRate = +this.value;
-  	chart.update({duration: 0});
-  	document.getElementById('frameRateValue').innerHTML = this.value;
+  document.getElementById('frameRate').addEventListener(isIE ? 'change' : 'input', function () {
+    config.options.plugins.streaming.frameRate = +this.value;
+    chart.update({ duration: 0 });
+    document.getElementById('frameRateValue').innerHTML = this.value;
   });
 
-  document.getElementById('pause').addEventListener('change', function() {
-  	config.options.scales.xAxes[0].realtime.pause = this.checked;
-  	chart.update({duration: 0});
-  	document.getElementById('pauseValue').innerHTML = this.checked;
+  document.getElementById('pause').addEventListener('change', function () {
+    config.options.scales.xAxes[0].realtime.pause = this.checked;
+    chart.update({ duration: 0 });
+    document.getElementById('pauseValue').innerHTML = this.checked;
   });
 }
 
 function randomScalingFactor() {
-	return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+  return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
 }
 
-function onRefresh(chart){
+function onRefresh(chart) {
   chart.config.data.datasets[0].data.push({
     x: Date.now(),
     y: signal_one
@@ -369,46 +370,62 @@ function onRefresh(chart){
     y: signal_eight
   });
   // chart.config.data.datasets.forEach(function(dataset) {
-	// 	dataset.data.push({
-	// 		x: Date.now(),
-	// 		y: randomScalingFactor()
-	// 	});
-	// });
+  // 	dataset.data.push({
+  // 		x: Date.now(),
+  // 		y: randomScalingFactor()
+  // 	});
+  // });
 }
 
 /*Llenar los SELECT del modal*/
-function Pacientes(){
-  pool.getConnection()
-    .then(conn => {
-      conn.query("SELECT RSD_ID, RSD_NAME, RSD_LASTNAME FROM RESIDENCIA.rs_datospersona")
-        .then((rows) => {
-          //console.log(rows); //[ {val: 1}, meta: ... ]
-          for (var i = 0; i < rows.length; i++) {
-            $("#patient").append(new Option(rows[i].RSD_NAME + " " + rows[i].RSD_LASTNAME, rows[i].RSD_ID));
-          }
-        })
-        .then((res) => {
-          //console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
-          //alert(res);
-          conn.end();
-        })
-        .catch(err => {
-          //handle error
-          console.log(err);
-          conn.end();
-        })
+async function Pacientes() {
+  // pool.getConnection()
+  //   .then(conn => {
+  //     conn.query("SELECT RSD_ID, RSD_NAME, RSD_LASTNAME FROM RESIDENCIA.rs_datospersona")
+  //       .then((rows) => {
+  //         console.log(rows); //[ {val: 1}, meta: ... ]
+  //         for (var i = 0; i < rows.length; i++) {
+  //           $("#patient").append(new Option(rows[i].RSD_NAME + " " + rows[i].RSD_LASTNAME, rows[i].RSD_ID));
+  //         }
+  //       })
+  //       .then((res) => {
+  //         //console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
+  //         //alert(res);
+  //         conn.end();
+  //       })
+  //       .catch(err => {
+  //         //handle error
+  //         console.log(err);
+  //         conn.end();
+  //       })
 
-    }).catch(err => {
-      //not connected
-    });
+  //   }).catch(err => {
+  //     //not connected
+  //   });
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const rows = await conn.query("SELECT RSD_ID, RSD_NAME, RSD_LASTNAME FROM rs_datospersona");
+    console.log(rows); //[ {val: 1}, meta: ... ]
+    for (var i = 0; i < rows.length; i++) {
+      $("#patient").append(new Option(rows[i].RSD_NAME + " " + rows[i].RSD_LASTNAME, rows[i].RSD_ID));
+    }
+  } 
+  catch (err) {
+    alert(err);
+  } 
+  finally {
+    if (conn) return conn.end();
+  }
+
 }
 
-function Emotions(){
+function Emotions() {
   pool.getConnection()
     .then(conn => {
       conn.query("SELECT DISTINCT(RSC_EMOCION) FROM RESIDENCIA.rs_catalog_video")
         .then((rows) => {
-          //console.log(rows); //[ {val: 1}, meta: ... ]
+          console.log(rows); //[ {val: 1}, meta: ... ]
           for (var i = 0; i < rows.length; i++) {
             $("#emotion_select").append(new Option(rows[i].RSC_EMOCION, rows[i].RSC_EMOCION));
           }
@@ -429,12 +446,12 @@ function Emotions(){
     });
 }
 
-function Videos(emotion){
+function Videos(emotion) {
   pool.getConnection()
     .then(conn => {
       conn.query("SELECT RSC_ARTISTA, RSC_CANCION, RSC_EMOCION, RSC_ENLACE FROM RESIDENCIA.rs_catalog_video WHERE RSC_EMOCION = '" + emotion + "'")
         .then((rows) => {
-          //console.log(rows); //[ {val: 1}, meta: ... ]
+          console.log(rows); //[ {val: 1}, meta: ... ]
           for (var i = 0; i < rows.length; i++) {
             $("#video").append(new Option(rows[i].RSC_CANCION + " - " + rows[i].RSC_ARTISTA, rows[i].RSC_ENLACE));
           }
